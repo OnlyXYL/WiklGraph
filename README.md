@@ -28,3 +28,13 @@
      > themleaf  
      
     - #### JVM
+
+# `端口`
+
+```
+wikl-eureka : 8761
+orientdb-jdbc: 8762
+orientdb-gremlin: 8763
+neo4j-jdbc: 8764
+neo4j-gremlin: 8765
+```

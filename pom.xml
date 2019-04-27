@@ -58,6 +58,16 @@
     <!--所有子pom中直接继承使用-->
     <dependencies>
 
+        <!--#############################################-->
+        <!--#                                           #-->
+        <!--#    Spring Cloud starter-config            #-->
+        <!--#                                           #-->
+        <!--#############################################-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
