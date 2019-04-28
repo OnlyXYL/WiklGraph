@@ -48,6 +48,7 @@ neo4j-gremlin: 8765
     ######  [1. Missing session and token](https://community.orientdb.org/t/missing-session-and-token/299)
     ###### [2. Define SQL Result Data](https://community.orientdb.org/t/define-sql-result-data/442)
     ###### [3. Gremlin with OResultSet.close() exception](https://community.orientdb.org/t/gremlin-with-oresultset-close-exception/445)
+    ###### [4. Can not delete edge](https://community.orientdb.org/t/can-not-delete-edge/88)
  
    * 未解决
      ###### [1. Can not use the method of shortestPath()](https://community.orientdb.org/t/can-not-use-the-method-of-shortestpath/431)
