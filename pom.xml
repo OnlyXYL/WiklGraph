@@ -39,6 +39,7 @@
         <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
         <springfox.swagger2.version>2.9.2</springfox.swagger2.version>
         <springfox.swagge.ui.version>2.9.2</springfox.swagge.ui.version>
+        <lombok.version>1.16.10</lombok.version>
     </properties>
 
     <dependencyManagement>
@@ -97,6 +98,12 @@
             <version>${springfox.swagge.ui.version}</version>
         </dependency>
 
+        <!--lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
