@@ -14,5 +14,12 @@
     <artifactId>orientdb-utils</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
+    <dependencies>
+        <dependency>
+            <groupId>top.wikl</groupId>
+            <artifactId>orientdb-entity</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

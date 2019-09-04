@@ -1,4 +1,4 @@
-package top.wikl.orientdbjdbc;
+package top.wikl.neo4j;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,9 +11,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2019/4/2719:14
  */
 @SpringBootApplication
-public class OrientDbJdbcApplication {
+public class Neo4jJdbcApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(OrientDbJdbcApplication.class,args);
+        SpringApplication.run(Neo4jJdbcApplication.class,args);
     }
 }

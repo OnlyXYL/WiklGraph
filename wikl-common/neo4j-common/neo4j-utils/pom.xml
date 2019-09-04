@@ -14,5 +14,12 @@
     <artifactId>neo4j-utils</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
+    <dependencies>
+        <dependency>
+            <groupId>top.wikl</groupId>
+            <artifactId>neo4j-entity</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

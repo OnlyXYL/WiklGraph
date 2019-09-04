@@ -1,4 +1,4 @@
-package top.wikl.orientdbgremlin;
+package top.wikl.neo4j;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
