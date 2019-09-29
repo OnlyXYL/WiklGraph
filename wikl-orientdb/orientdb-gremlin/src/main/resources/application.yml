@@ -1,5 +1,7 @@
 server:
   port: 8763
+  servlet:
+    context-path: /orientdb-gremlin
 
 spring:
   application:

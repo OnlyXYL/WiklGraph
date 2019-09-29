@@ -1,5 +1,7 @@
 server:
   port: 8765
+  servlet:
+    context-path: /neo4j-gremlin
 
 spring:
   application:
