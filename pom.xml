@@ -30,6 +30,8 @@
         <module>wikl-common/orientdb-common</module>
         <module>wikl-common/orientdb-common/orientdb-entity</module>
         <module>wikl-common/orientdb-common/orientdb-utils</module>
+        <module>wikl-common/common-entity</module>
+        <module>wikl-common/wikl-exception</module>
         <module>wikl-cloud</module>
         <module>wikl-cloud/wikl-eureka</module>
     </modules>
@@ -40,6 +42,9 @@
         <springfox.swagger2.version>2.9.2</springfox.swagger2.version>
         <springfox.swagge.ui.version>2.9.2</springfox.swagge.ui.version>
         <lombok.version>1.16.10</lombok.version>
+        <fastjson.version>1.2.60</fastjson.version>
+        <hutools.version>4.5.5</hutools.version>
+        <lru.version>1.4.2</lru.version>
     </properties>
 
     <dependencyManagement>
@@ -65,11 +70,10 @@
                 <version>${springfox.swagge.ui.version}</version>
             </dependency>
 
-            <!--lombok-->
             <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
+                <groupId>com.googlecode.concurrentlinkedhashmap</groupId>
+                <artifactId>concurrentlinkedhashmap-lru</artifactId>
+                <version>${lru.version}</version>
             </dependency>
 
         </dependencies>
@@ -104,6 +108,39 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+        <!--json-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-io</groupId>
+                    <artifactId>commons-io</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!--hutools工具-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutools.version}</version>
+        </dependency>
+
+        <!--lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+
     </dependencies>
 
     <!--[注意] 最新的spring cloud的包可能还没有在maven上，所以配置spring的仓库download最新的包-->

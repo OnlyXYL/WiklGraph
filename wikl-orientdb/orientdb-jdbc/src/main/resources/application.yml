@@ -1,9 +1,22 @@
 server:
   port: 8762
+  servlet:
+    context-path: /orientdb-jdbc
 
 spring:
   application:
     name: orientdb-jdbc
+
+#存储相关的配置
+storage:
+    #orientdb setting
+  orientdb:
+    #    url: remote:10.0.47.59/kngraphIndex;10.0.47.60/kngraphIndex;10.0.47.61/kngraphIndex
+    jdbcurl: remote:10.0.47.51
+    url: remote:10.0.47.51/orientdb_3_1_dev
+    database: orientdb_3_1_dev
+    username: root
+    password: password
 
 eureka:
   client:
@@ -11,3 +24,9 @@ eureka:
   # 这只为prefer ip的话可以直接展示ip地址
   instance:
     prefer-ip-address: true
+
+# 日志配置
+logging:
+  level: debug
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"

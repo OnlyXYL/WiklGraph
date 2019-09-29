@@ -1,1 +1,15 @@
+server:
+  port: 8766
+  servlet:
+    context-path: /wikl-portal
 
+spring:
+  application:
+    name: wikl-portal
+
+eureka:
+  client:
+    service-url: http://localhost:8761/eureka/
+  # 这只为prefer ip的话可以直接展示ip地址
+  instance:
+    prefer-ip-address: true
