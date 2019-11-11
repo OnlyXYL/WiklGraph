@@ -20,9 +20,9 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 import top.wikl.constant.SysConstant;
 import top.wikl.entity.graph.output.*;
 import top.wikl.orientdb.enums.WiklGraphType;
-import top.wikl.utils.DateUtils;
-import top.wikl.utils.WiklGraphNodeUtils;
-import top.wikl.utils.WiklSortListUtil;
+import top.wikl.utils.date.WiklDateUtil;
+import top.wikl.utils.list.WiklSortListUtil;
+import top.wikl.utils.system.WiklGraphNodeUtils;
 
 import java.util.*;
 
@@ -1551,7 +1551,7 @@ public class WiklGraphResultUtil {
 
                 if ("date".equals(propertyKey)) {
                     start.setCreateDate((Date) value);
-                    value = DateUtils.formatDate((Date) value);
+                    value = WiklDateUtil.getDay((Date) value);
                 }
 
                 if ("name".equals(propertyKey)) {
@@ -1585,7 +1585,7 @@ public class WiklGraphResultUtil {
             start.setNodeSize(2);
         }
 
-        start.setOthers(propertyMap);
+        start.setProperties(propertyMap);
 
         nodes.add(start);
     }
@@ -1620,7 +1620,7 @@ public class WiklGraphResultUtil {
                     Object value = edge.value(propertyKey);
 
                     if ("date".equals(propertyKey)) {
-                        value = DateUtils.formatDate((Date) value);
+                        value = WiklDateUtil.getDay((Date) value);
                     }
 
                     propertyMap.put(propertyKey, value);
@@ -1644,7 +1644,7 @@ public class WiklGraphResultUtil {
                     Object value = vertex.value(propertyKey);
 
                     if ("date".equals(propertyKey)) {
-                        value = DateUtils.formatDate((Date) value);
+                        value = WiklDateUtil.getDay((Date) value);
                     }
 
                     propertyMap.put(propertyKey, value);
@@ -1671,7 +1671,7 @@ public class WiklGraphResultUtil {
                     Object value = oVertexDocument.getProperty(propertyKey);
 
                     if ("date".equals(propertyKey)) {
-                        value = DateUtils.formatDate((Date) value);
+                        value = WiklDateUtil.getDay((Date) value);
                     }
 
                     propertyMap.put(propertyKey, value);
@@ -1697,7 +1697,7 @@ public class WiklGraphResultUtil {
                     Object value = oEdgeDocument.getProperty(propertyKey);
 
                     if ("date".equals(propertyKey)) {
-                        value = DateUtils.formatDate((Date) value);
+                        value = WiklDateUtil.getDay((Date) value);
                     }
 
                     propertyMap.put(propertyKey, value);
@@ -1739,7 +1739,7 @@ public class WiklGraphResultUtil {
                     Object value = edge.value(propertyKey);
 
                     if ("date".equals(propertyKey)) {
-                        value = DateUtils.formatDate((Date) value);
+                        value = WiklDateUtil.getDay((Date) value);
                     }
 
                     propertyMap.put(propertyKey, value);
@@ -1765,7 +1765,7 @@ public class WiklGraphResultUtil {
                     Object value = edge.getProperty(propertyKey);
 
                     if ("date".equals(propertyKey)) {
-                        value = DateUtils.formatDate((Date) value);
+                        value = WiklDateUtil.getDay((Date) value);
                     }
 
                     propertyMap.put(propertyKey, value);
@@ -1789,7 +1789,7 @@ public class WiklGraphResultUtil {
                     Object value = vertex.value(propertyKey);
 
                     if ("date".equals(propertyKey)) {
-                        value = DateUtils.formatDate((Date) value);
+                        value = WiklDateUtil.getDay((Date) value);
                     }
 
                     propertyMap.put(propertyKey, value);
@@ -1813,7 +1813,7 @@ public class WiklGraphResultUtil {
                     Object value = vertex.getProperty(propertyKey);
 
                     if ("date".equals(propertyKey)) {
-                        value = DateUtils.formatDate((Date) value);
+                        value = WiklDateUtil.getDay((Date) value);
                     }
 
                     propertyMap.put(propertyKey, value);
@@ -1922,13 +1922,13 @@ public class WiklGraphResultUtil {
             //属性key
             String propertyKey = iterator.next();
 
-            if (!strings.contains(propertyKey) && !propertyKey.equals("out") && !propertyKey.equals("in")) {
+            if (!strings.contains(propertyKey) && !("out").equals(propertyKey)&& !("in").equals(propertyKey)) {
 
                 Object value = oEdge.getProperty(propertyKey);
 
                 if ("date".equals(propertyKey)) {
                     relationship.setCreateDate((Date) value);
-                    value = DateUtils.formatDate((Date) value);
+                    value = WiklDateUtil.getDay((Date) value);
                 }
 
                 propertyMap.put(propertyKey, value);

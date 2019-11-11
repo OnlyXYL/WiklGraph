@@ -8,34 +8,41 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import top.wikl.utils.holder.WiklLogHolder;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * 记录方法执行日志的切面处理类
  *
+ * @param
  * @author XYL
- * @Title: CostTimeAOP
- * @ProjectName SemanticCube
- * @date 2019/2/2714:24
- * @since V3.1
+ * @date 2019/2/27 14:24
+ * @return
+ * @since V1.0
  */
 @Aspect
 @Component
 @Slf4j
 public class WiklMethodLogAOP {
 
-    //统计请求的处理时间
-    ThreadLocal<Long> startTime = new ThreadLocal<>();
-
     @Pointcut("@annotation(top.wikl.annotion.WiklMethodLog)")
     public void costTimePointCut() {
     }
 
+    /**
+     * 环绕增强
+     *
+     * @param
+     * @return
+     * @author XYL
+     * @date 2019/10/30 17:33
+     * @since V1.0
+     */
     @Around("costTimePointCut()")
     public Object around(ProceedingJoinPoint point) throws Throwable {
 
-        startTime.set(System.currentTimeMillis());
+        WiklLogHolder.set(System.currentTimeMillis());
 
         //接收到请求，记录请求内容
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -51,7 +58,7 @@ public class WiklMethodLogAOP {
         Object result = point.proceed();
 
         //执行时长(毫秒)
-        System.out.println("方法执行时间 : " + (System.currentTimeMillis() - startTime.get() + " ms"));
+        System.out.println("方法执行时间 : " + (System.currentTimeMillis() - WiklLogHolder.get() + " ms"));
 
         return result;
     }

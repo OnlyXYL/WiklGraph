@@ -1,7 +1,8 @@
-package top.wikl.utils;
+package top.wikl.utils.date;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -36,15 +37,15 @@ public class WiklDateUtil {
     private final static SimpleDateFormat LOCATE_DATE_FORMAT2 = new SimpleDateFormat("yyyyMMddHHmmss");
     private static final int DAYS_OF_A_WEEK = 7;
 
-    private final static SimpleDateFormat sdfYear = new SimpleDateFormat("yyyy");
+    private final static SimpleDateFormat SDF_YEAR = new SimpleDateFormat("yyyy");
 
-    private final static SimpleDateFormat sdfDay = new SimpleDateFormat("yyyy-MM-dd");
+    private final static SimpleDateFormat SDF_DAY = new SimpleDateFormat("yyyy-MM-dd");
 
-    private final static SimpleDateFormat sdfDays = new SimpleDateFormat("yyyyMMdd");
+    private final static SimpleDateFormat SDF_DAYS = new SimpleDateFormat("yyyyMMdd");
 
-    private final static SimpleDateFormat sdfTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private final static SimpleDateFormat SDF_TIME = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    private final static SimpleDateFormat sdfTimeMs = new SimpleDateFormat("yyyyMMddhhmmss.SSS");
+    private final static SimpleDateFormat SDF_TIMES = new SimpleDateFormat("yyyyMMddhhmmss.SSS");
 
     /**
      * 获取yyyyMMddhhmmss.SSS格式
@@ -56,7 +57,7 @@ public class WiklDateUtil {
      * @since V1.0
      */
     public static String getTimeMs() {
-        return sdfTimeMs.format(new Date());
+        return SDF_TIMES.format(new Date());
     }
 
     /**
@@ -69,7 +70,7 @@ public class WiklDateUtil {
      * @since V1.0
      */
     public static String getYear() {
-        return sdfYear.format(new Date());
+        return SDF_YEAR.format(new Date());
     }
 
     /**
@@ -82,7 +83,20 @@ public class WiklDateUtil {
      * @since V1.0
      */
     public static String getDay() {
-        return sdfDay.format(new Date());
+        return SDF_DAY.format(new Date());
+    }
+
+    /**
+     * 获取YYYY-MM-DD格式
+     *
+     * @param
+     * @return
+     * @author XYL
+     * @date 2019/10/30 18:00
+     * @since V1.0
+     */
+    public static String getDay(Date date) {
+        return SDF_DAY.format(date);
     }
 
     /**
@@ -95,7 +109,7 @@ public class WiklDateUtil {
      * @since V1.0
      */
     public static String getDays() {
-        return sdfDays.format(new Date());
+        return SDF_DAYS.format(new Date());
     }
 
     /**
@@ -108,7 +122,7 @@ public class WiklDateUtil {
      * @since V1.0
      */
     public static String getTime() {
-        return sdfTime.format(new Date());
+        return SDF_TIME.format(new Date());
     }
 
     /**
@@ -139,7 +153,7 @@ public class WiklDateUtil {
      */
     public static Date fomatDate(String date) {
         try {
-            return sdfDay.parse(date);
+            return SDF_DAY.parse(date);
         } catch (ParseException e) {
             e.printStackTrace();
             return null;
@@ -157,7 +171,7 @@ public class WiklDateUtil {
      */
     public static boolean isValidDate(String s) {
         try {
-            sdfDay.parse(s);
+            SDF_DAY.parse(s);
             return true;
         } catch (Exception e) {
             // 如果throw java.text.ParseException或者NullPointerException，就说明格式不对
@@ -176,7 +190,7 @@ public class WiklDateUtil {
      */
     public static int getDiffYear(String startTime, String endTime) {
         try {
-            int years = (int) (((sdfDay.parse(endTime).getTime() - sdfDay.parse(startTime).getTime()) / (1000 * 60 * 60 * 24))
+            int years = (int) (((SDF_DAY.parse(endTime).getTime() - SDF_DAY.parse(startTime).getTime()) / (1000 * 60 * 60 * 24))
                     / 365);
             return years;
         } catch (Exception e) {
@@ -200,8 +214,8 @@ public class WiklDateUtil {
         Date endDate = null;
 
         try {
-            beginDate = sdfDay.parse(beginDateStr);
-            endDate = sdfDay.parse(endDateStr);
+            beginDate = SDF_DAY.parse(beginDateStr);
+            endDate = SDF_DAY.parse(endDateStr);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -234,7 +248,7 @@ public class WiklDateUtil {
         canlendar.add(Calendar.DATE, daysInt);
         Date date = canlendar.getTime();
 
-        String dateStr = sdfTime.format(date);
+        String dateStr = SDF_TIME.format(date);
 
         return dateStr;
     }

@@ -6,6 +6,11 @@ server:
 spring:
   application:
     name: wikl-portal
+  servlet:
+    multipart:
+      #springboot 2.1 后增加 DataSize ,用来避免数据曝光
+      max-file-size: 104857600
+      max-request-size: 524288000
 
 eureka:
   client:

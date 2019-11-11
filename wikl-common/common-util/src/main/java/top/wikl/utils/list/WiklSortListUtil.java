@@ -1,4 +1,4 @@
-package top.wikl.utils;
+package top.wikl.utils.list;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -30,6 +30,7 @@ public class WiklSortListUtil<E> {
                              final boolean reverseFlag) {
         Collections.sort(list, new Comparator<Object>() {
             @SuppressWarnings("unchecked")
+            @Override
             public int compare(Object arg1, Object arg2) {
                 int result = 0;
                 try {

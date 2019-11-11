@@ -1,4 +1,4 @@
-package top.wikl.utils;
+package top.wikl.utils.application;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

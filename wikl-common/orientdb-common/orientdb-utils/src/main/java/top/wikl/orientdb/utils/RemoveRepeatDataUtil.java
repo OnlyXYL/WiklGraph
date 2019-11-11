@@ -22,7 +22,7 @@ public class RemoveRepeatDataUtil {
 
         ArrayList<WiklNodeInfo> newNodes = new ArrayList<>();
         for (WiklNodeInfo node : OldNodes) {
-            if (!node.getNodeName().equals("null") && !newNodes.contains(node)) {
+            if (!("null").equals(node.getNodeName()) && !newNodes.contains(node)) {
                 newNodes.add(node);
             }
         }

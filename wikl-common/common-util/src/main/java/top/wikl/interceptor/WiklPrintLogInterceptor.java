@@ -1,10 +1,10 @@
-package top.wikl.orientdb.interceptor;
+package top.wikl.interceptor;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import top.wikl.utils.WiklDateUtil;
+import top.wikl.utils.date.WiklDateUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

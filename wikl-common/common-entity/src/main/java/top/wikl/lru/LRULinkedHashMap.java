@@ -1,11 +1,5 @@
 package top.wikl.lru;
 
-/**
- * @program: distributed-web-crawler
- * @description:
- * @author: Xiaoming.Wang
- * @create: 2019-05-07 11:31
- **/
 
 import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap;
 import com.googlecode.concurrentlinkedhashmap.Weighers;
@@ -14,22 +8,31 @@ import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class LRULinkedHashMap<K, V>{
-    public static final int                     DEFAULT_CONCURENCY_LEVEL = 64;
+/**
+ * LRU
+ *
+ * @param
+ * @author XYL
+ * @date 2019/10/30 17:34
+ * @return
+ * @since V1.0
+ */
+public class LRULinkedHashMap<K, V> {
+    public static final int DEFAULT_CONCURENCY_LEVEL = 64;
 
     private final ConcurrentLinkedHashMap<K, V> map;
-    private final AtomicLong requests                 = new AtomicLong(0);
-    private final AtomicLong                    hits                     = new AtomicLong(0);
-    private final AtomicLong                    lastRequests             = new AtomicLong(0);
-    private final AtomicLong                    lastHits                 = new AtomicLong(0);
-    private volatile boolean                    capacitySetManually;
+    private final AtomicLong requests = new AtomicLong(0);
+    private final AtomicLong hits = new AtomicLong(0);
+    private final AtomicLong lastRequests = new AtomicLong(0);
+    private final AtomicLong lastHits = new AtomicLong(0);
+    private volatile boolean capacitySetManually;
 
     public LRULinkedHashMap(int capacity) {
         this(capacity, DEFAULT_CONCURENCY_LEVEL);
     }
 
     public LRULinkedHashMap(int capacity, int concurrency) {
-        map = new ConcurrentLinkedHashMap.Builder<K, V>().weigher(Weighers.<V> singleton())
+        map = new ConcurrentLinkedHashMap.Builder<K, V>().weigher(Weighers.<V>singleton())
                 .initialCapacity(capacity).maximumWeightedCapacity(capacity)
                 .concurrencyLevel(concurrency).build();
     }

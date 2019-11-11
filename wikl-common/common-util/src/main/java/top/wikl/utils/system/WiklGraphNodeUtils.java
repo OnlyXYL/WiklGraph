@@ -1,8 +1,9 @@
-package top.wikl.utils;
+package top.wikl.utils.system;
 
 import lombok.Data;
 import top.wikl.entity.graph.show.ColorMap;
 import top.wikl.entity.graph.show.ColorRange;
+import top.wikl.utils.application.ApplicationContextUtil;
 
 import java.util.Collections;
 import java.util.List;
