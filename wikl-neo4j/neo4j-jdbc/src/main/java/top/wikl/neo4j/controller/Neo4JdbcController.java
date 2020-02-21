@@ -57,6 +57,8 @@ public class Neo4JdbcController {
         List<WiklNodeInfo> nodeInfos = neo4jService.searchOneNode(inInput);
 
         return ResponseEntity
+
+
                 .ok()
                 .body(
                         nodeInfos

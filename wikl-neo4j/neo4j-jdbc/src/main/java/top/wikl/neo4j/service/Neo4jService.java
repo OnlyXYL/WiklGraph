@@ -2,6 +2,7 @@ package top.wikl.neo4j.service;
 
 import top.wikl.entity.graph.input.InInput;
 import top.wikl.entity.graph.output.WiklNodeInfo;
+import top.wikl.entity.graph.output.WiklResultData;
 
 import java.util.List;
 
@@ -25,4 +26,15 @@ public interface Neo4jService {
      * @since V1.0
      */
     List<WiklNodeInfo> searchOneNode(InInput inInput);
+
+    /**
+     * 根据深度查询图谱数据
+     *
+     * @param
+     * @return
+     * @author XYL
+     * @date 2019/11/11 11:52
+     * @since V1.0
+     */
+    WiklResultData searchByDepth(InInput inInput);
 }

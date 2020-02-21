@@ -254,6 +254,36 @@ public class WiklDateUtil {
     }
 
     /**
+     * 得到n天之后的日期
+     *
+     * @param
+     * @return
+     * @author XYL
+     * @date 2019/9/27 12:56
+     * @since V1.0
+     */
+    public static String getAfterDayDate(String days, String format) {
+        int daysInt = Integer.parseInt(days);
+
+        /**
+         * java.util包
+         */
+        Calendar canlendar = Calendar.getInstance();
+
+        /**
+         * 日期减 如果不够减会将月变动
+         */
+        canlendar.add(Calendar.DATE, daysInt);
+        Date date = canlendar.getTime();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format);
+
+        String dateStr = dateFormat.format(date);
+
+        return dateStr;
+    }
+
+    /**
      * 得到n天之后是周几
      *
      * @param

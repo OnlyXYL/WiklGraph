@@ -6,14 +6,20 @@
         <groupId>top.wikl</groupId>
         <artifactId>wiklgraph</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../../</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>orientdb-gremlin</artifactId>
-
+    <groupId>top.wikl</groupId>
+    <artifactId>wikl-component</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>
+        <dependency>
+            <groupId>top.wikl</groupId>
+            <artifactId>orientdb-entity</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
@@ -26,24 +32,9 @@
             </exclusions>
         </dependency>
 
-        <!--=======================================公共模块========================================-->
         <dependency>
-            <groupId>top.wikl</groupId>
-            <artifactId>orientdb-entity</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>top.wikl</groupId>
-            <artifactId>orientdb-utils</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.orientechnologies</groupId>
-            <artifactId>orientdb-graphdb</artifactId>
-            <version>3.0.27</version>
-            <scope>compile</scope>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
         </dependency>
 
     </dependencies>
@@ -56,4 +47,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

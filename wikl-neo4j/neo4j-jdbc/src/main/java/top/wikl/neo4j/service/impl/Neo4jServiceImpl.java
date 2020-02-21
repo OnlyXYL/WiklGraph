@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import top.wikl.annotion.WiklMethodLog;
 import top.wikl.entity.graph.input.InInput;
 import top.wikl.entity.graph.output.WiklNodeInfo;
+import top.wikl.entity.graph.output.WiklResultData;
 import top.wikl.neo4j.service.Neo4jService;
 import top.wikl.properties.PropertiesUtil;
 
@@ -16,9 +17,26 @@ import javax.annotation.Resource;
 import java.util.*;
 
 /**
+ * Map<String, Object> metadata = new HashMap<>();
+ * metadata.put("type", "update name");
+ * <p>
+ * TransactionConfig config = TransactionConfig.builder()
+ * .withTimeout(Duration.ofSeconds(3))
+ * .withMetadata(metadata)
+ * .build();
+ * <p>
+ * Map<String, Object> parameters = new HashMap<>();
+ * parameters.put("myNameParam", "Bob");
+ * <p>
+ * StatementResult cursor = session.run("MATCH (n) WHERE n.name = {myNameParam} RETURN (n)", parameters, config);
+ * <p>
+ * Statement statement = new Statement("MATCH (n) WHERE n.name=$myNameParam RETURN n.age");
+ * <p>
+ * StatementResult cursor1 = session.run(statement.withParameters(Values.parameters("myNameParam", "Bob")));
+ *
  * @author XYL
  * @title: Neo4jServiceImpl
- * @description: TODO
+ * @description: 【neo4j-jdbc】
  * @date 2019/10/30 19:55
  * @return
  * @since V1.0
@@ -124,7 +142,6 @@ public class Neo4jServiceImpl implements Neo4jService {
 
                         list.add(wiklNodeInfo);
                     }
-
                 }
             }
 
@@ -132,7 +149,38 @@ public class Neo4jServiceImpl implements Neo4jService {
 
         });
 
+        session.close();
+
         return stream;
 
+    }
+
+    @Override
+    public WiklResultData searchByDepth(InInput inInput) {
+
+        Session session = driver.session(AccessMode.READ);
+
+        Map<String, String> conditions = inInput.getConditions();
+
+        Integer depth = inInput.getDepth();
+
+        //label
+        String label = inInput.getLabel();
+
+        StringBuilder cypterSql = new StringBuilder();
+
+//        cypterSql.append("match p=(person:" + label + "{name:\"" + condition + "\"})-[*.." + depth + "]-(movie:" + label + ") \n"  +
+//                "                                return person,movie,extract(n in relationships(p) | (({source:id(startNode(n)),target:id(endNode(n)),relationShip:type(n)}))) as edges");
+
+        Object transaction = session.readTransaction(tx -> {
+
+            StringBuilder cypherSql = new StringBuilder();
+
+            StatementResult result = tx.run(cypherSql.toString());
+
+            return result;
+        });
+
+        return null;
     }
 }

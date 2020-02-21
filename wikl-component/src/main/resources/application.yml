@@ -1,11 +1,11 @@
 server:
-  port: 8762
+  port: 8766
   servlet:
-    context-path: /orientdb-jdbc
+    context-path: /wikl-component
 
 spring:
   application:
-    name: orientdb-jdbc
+    name: wikl-component
   servlet:
     multipart:
       #springboot 2.1 后增加 DataSize ,用来避免数据曝光
@@ -17,22 +17,21 @@ storage:
     #orientdb setting
   orientdb:
     #    url: remote:10.0.47.59/kngraphIndex;10.0.47.60/kngraphIndex;10.0.47.61/kngraphIndex
-    jdbcurl: remote:10.0.43.101
-    url: remote:10.0.43.101/xyl
-    database: xyl
+    jdbcurl: remote:10.0.47.51
+    url: remote:10.0.47.51/orientdb_3_1_dev
+    database: orientdb_3_1_dev
     username: root
     password: password
 
 eureka:
   client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+    service-url: http://localhost:8761/eureka/
   # 这只为prefer ip的话可以直接展示ip地址
   instance:
     prefer-ip-address: true
 
 # 日志配置
-#logging:
-#  level: debug
-#  pattern:
-#    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+logging:
+  level: debug
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"

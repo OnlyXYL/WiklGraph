@@ -35,6 +35,8 @@
         <module>wikl-cloud</module>
         <module>wikl-cloud/wikl-eureka</module>
         <module>wikl-common/common-util</module>
+        <module>wikl-janusgraph</module>
+        <module>wikl-component</module>
     </modules>
 
     <properties>
@@ -154,14 +156,35 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
+        <!--<repository>
+            <id>nexus-aliyun</id>
+            <name>Nexus aliyun</name>
+            <layout>default</layout>
+            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>-->
+
         <repository>
-            <id>central</id>
+            <id>Central Repository</id>
             <name>Central Repository</name>
-            <url>http://central.maven.org/maven2/</url>
+            <url>https://mvnrepository.com</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
         </repository>
+        <!--        <repository>
+                    <id>Central Repository</id>
+                    <name>Central Repository</name>
+                    <url>http://central.maven.org/maven2/</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>-->
     </repositories>
 
 </project>
