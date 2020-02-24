@@ -1,5 +1,7 @@
 package top.wikl.orientdb;
 
+import com.orientechnologies.orient.client.remote.OStorageRemote;
+import com.orientechnologies.orient.core.config.OGlobalConfiguration;
 import com.orientechnologies.orient.core.db.ODatabaseSession;
 import com.orientechnologies.orient.core.db.OrientDB;
 import com.orientechnologies.orient.core.db.OrientDBConfig;
@@ -28,33 +30,33 @@ public class demo5 {
 
         String _url = "remote:10.0.43.101,10.0.43.102,10.0.43.103,10.0.43.104,10.0.43.105,10.0.43.106";
 
-        OrientDB orient = connect(_url);
+        OrientDBConfig config = OrientDBConfig.builder()
+                //设置负载均衡策略
+                .addConfig(OGlobalConfiguration.CLIENT_CONNECTION_STRATEGY, OStorageRemote.CONNECTION_STRATEGY.ROUND_ROBIN_REQUEST.toString())
+                //设置session超时时间
+                .addConfig(OGlobalConfiguration.NETWORK_TOKEN_EXPIRE_TIMEOUT, 30)
+                .build();
 
-        ODatabaseSession pool = orient.open("xyl", "root", "password");
+        OrientDB orient = new OrientDB(_url, config);
 
-        String cluster = "client_node107";
+        ODatabaseSession session = orient.open("xyl", "root", "password");
 
-        String aClass = "employee";
+        String cluster = "city_node101";
+
+        String aClass = "city";
+
+        OResultSet command = session.command("select from cluster:" + cluster);
+        while (command.hasNext()){
+            System.out.println("通过 Cluster 查询数据成功!");
+            command.close();
+        }
 
         //1. 查询
-        execute(pool, aClass, cluster);
-    }
+//        execute(session, aClass, cluster);
 
-    /**
-     * 连接
-     *
-     * @param
-     * @return
-     * @author XYL
-     * @date 2020/2/6 17:47
-     * @since V1.0
-     */
-    public static OrientDB connect(String url) {
+        session.close();
 
-        //1.创建客户端
-        OrientDB orient = new OrientDB(url, OrientDBConfig.defaultConfig());
-
-        return orient;
+        orient.close();
     }
 
     /**
@@ -136,8 +138,6 @@ public class demo5 {
         } else {
             System.out.println("没有数据！");
         }
-
-        session.close();
 
     }
 }
