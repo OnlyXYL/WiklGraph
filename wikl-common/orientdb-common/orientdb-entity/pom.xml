@@ -15,54 +15,35 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>
-<!--        <dependency>
-            <groupId>com.orientechnologies</groupId>
-            <artifactId>orientdb-client</artifactId>
-            <version>3.0.27</version>
+        <!--        <dependency>
+                    <groupId>com.orientechnologies</groupId>
+                    <artifactId>orientdb-client</artifactId>
+                    <version>3.0.29</version>
 
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-configuration</groupId>
-                    <artifactId>commons-configuration</artifactId>
-                </exclusion>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>commons-configuration</groupId>
+                            <artifactId>commons-configuration</artifactId>
+                        </exclusion>
 
-                <exclusion>
-                    <groupId>com.carrotsearch</groupId>
-                    <artifactId>hppc</artifactId>
-                </exclusion>
+                        <exclusion>
+                            <groupId>com.carrotsearch</groupId>
+                            <artifactId>hppc</artifactId>
+                        </exclusion>
 
-            </exclusions>
-        </dependency>-->
+                    </exclusions>
+                </dependency>-->
 
         <dependency>
             <groupId>com.orientechnologies</groupId>
             <artifactId>orientdb-jdbc</artifactId>
-            <version>3.0.27</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.tinkerpop</groupId>
-            <artifactId>tinkergraph-gremlin</artifactId>
-            <version>3.4.0</version>
+            <version>3.0.29</version>
         </dependency>
 
         <dependency>
             <groupId>com.orientechnologies</groupId>
             <artifactId>orientdb-gremlin</artifactId>
-            <version>3.0.27</version>
-
-            <exclusions>
-                <exclusion>
-                    <groupId>com.orientechnologies</groupId>
-                    <artifactId>orientdb-client</artifactId>
-                </exclusion>
-
-                <exclusion>
-                    <groupId>org.apache.tinkerpop</groupId>
-                    <artifactId>gremlin-core</artifactId>
-                </exclusion>
-
-            </exclusions>
+            <version>3.0.29</version>
         </dependency>
 
         <!--################### 公共模块 ##############-->
