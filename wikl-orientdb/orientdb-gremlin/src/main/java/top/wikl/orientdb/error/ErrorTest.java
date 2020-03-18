@@ -17,15 +17,13 @@ import top.wikl.orientdb.error.utils.KgGraphUtils;
 import java.util.*;
 
 /**
- *
  * README:
- *
+ * <p>
  * you should have some data in those list
- *
+ * <p>
  * kgConcepts
- *
+ * <p>
  * instanceNodes
- *
  *
  * @author XYL
  * @title: ErrorTest
@@ -159,7 +157,7 @@ public class ErrorTest {
         }
     }
 
-    private  static OType getOType(KgPropertyDataType type) {
+    private static OType getOType(KgPropertyDataType type) {
         switch (type) {
             case DATE:
                 return OType.DATETIME;

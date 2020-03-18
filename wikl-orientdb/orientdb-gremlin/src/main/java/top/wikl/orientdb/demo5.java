@@ -46,7 +46,7 @@ public class demo5 {
         String aClass = "city";
 
         OResultSet command = session.command("select from cluster:" + cluster);
-        while (command.hasNext()){
+        while (command.hasNext()) {
             System.out.println("通过 Cluster 查询数据成功!");
             command.close();
         }

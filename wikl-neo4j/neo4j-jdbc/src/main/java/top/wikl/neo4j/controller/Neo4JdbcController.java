@@ -39,7 +39,7 @@ public class Neo4JdbcController {
      * 查询单个点
      *
      * @param inInput, bindingResult
-     * @return org.springframework.http.ResponseEntity<java.util.List<org.neo4j.driver.v1.Record>>
+     * @return org.springframework.http.ResponseEntity<java.util.List < org.neo4j.driver.v1.Record>>
      * @author XYL
      * @date 2019/10/31 11:38
      * @since V1.0

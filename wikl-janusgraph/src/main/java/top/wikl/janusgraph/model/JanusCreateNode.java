@@ -26,5 +26,5 @@ public class JanusCreateNode {
     /**
      * 属性，值
      */
-    private Map<String,String> properties;
+    private Map<String, String> properties;
 }

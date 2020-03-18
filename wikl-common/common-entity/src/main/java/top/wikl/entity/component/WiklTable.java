@@ -3,12 +3,11 @@ package top.wikl.entity.component;
 import java.util.List;
 
 /**
- * 
- * @param  
- * @author XYL 
+ * @param
+ * @author XYL
  * @date 2019/12/17 14:44
- * @return  
- * @since  V1.0
+ * @return
+ * @since V1.0
  */
 public class WiklTable {
 

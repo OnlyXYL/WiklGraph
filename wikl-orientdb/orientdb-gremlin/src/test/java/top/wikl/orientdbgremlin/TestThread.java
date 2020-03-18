@@ -18,8 +18,8 @@ public class TestThread {
         MyThread myThread = new MyThread() {
             protected void runPersonelLogic() {
 
-                for (int i = 0;i<5000;i++) {
-                 log.info("i --> {}",i);
+                for (int i = 0; i < 5000; i++) {
+                    log.info("i --> {}", i);
                 }
                 this.setSuspend(true);
                 log.info("线程状态--> {}", " running");

@@ -14,7 +14,7 @@ spring:
 
 #存储相关的配置
 storage:
-    #orientdb setting
+  #orientdb setting
   orientdb:
     #    url: remote:10.0.47.59/kngraphIndex;10.0.47.60/kngraphIndex;10.0.47.61/kngraphIndex
     jdbcurl: remote:10.0.47.51

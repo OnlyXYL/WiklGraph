@@ -28,7 +28,7 @@ public class AutoBuildGrpah {
 
     public static void main(String[] args) {
 
-       SimpleDateFormat format = new SimpleDateFormat("yyyyMd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMd");
 
 
         String format1 = format.format(new Date());

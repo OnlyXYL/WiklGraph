@@ -27,17 +27,16 @@ import top.wikl.utils.system.WiklGraphNodeUtils;
 import java.util.*;
 
 /**
- *
  * @param
  * @author XYL
  * @date 2019/9/27 13:46
  * @return
- * @since  V1.0
+ * @since V1.0
  */
 @Slf4j
 public class WiklGraphResultUtil {
 
-    public static WiklResultData InitInstanceResult(OResultSet rs,  String label) {
+    public static WiklResultData InitInstanceResult(OResultSet rs, String label) {
         //结果对象
         WiklResultData resultData = new WiklResultData();
 
@@ -1922,7 +1921,7 @@ public class WiklGraphResultUtil {
             //属性key
             String propertyKey = iterator.next();
 
-            if (!strings.contains(propertyKey) && !("out").equals(propertyKey)&& !("in").equals(propertyKey)) {
+            if (!strings.contains(propertyKey) && !("out").equals(propertyKey) && !("in").equals(propertyKey)) {
 
                 Object value = oEdge.getProperty(propertyKey);
 

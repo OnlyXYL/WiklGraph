@@ -44,7 +44,7 @@ public class demo4 {
 
         Object property = factory.getProperty(OGlobalConfiguration.CLIENT_CONNECTION_STRATEGY.getKey());
 
-        System.out.println("工厂中负载均衡策略："+property);
+        System.out.println("工厂中负载均衡策略：" + property);
 
         OrientGraphNoTx graph = factory.getNoTx();
 

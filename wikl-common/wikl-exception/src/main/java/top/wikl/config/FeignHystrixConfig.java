@@ -19,7 +19,7 @@ import org.springframework.context.annotation.PropertySource;
 public class FeignHystrixConfig {
 
 
-     private boolean enabled;
+    private boolean enabled;
 
 
 }

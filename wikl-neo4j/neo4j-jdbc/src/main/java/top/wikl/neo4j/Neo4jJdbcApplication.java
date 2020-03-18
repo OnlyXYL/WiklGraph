@@ -18,6 +18,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class Neo4jJdbcApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Neo4jJdbcApplication.class,args);
+        SpringApplication.run(Neo4jJdbcApplication.class, args);
     }
 }
