@@ -1,5 +1,5 @@
 server:
-  port: 8766
+  port: 8768
   servlet:
     context-path: /wikl-component
 

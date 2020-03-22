@@ -8,7 +8,11 @@ import com.tinkerpop.blueprints.impls.orient.OrientGraphNoTx;
 import java.util.Iterator;
 
 /**
- * Created by XYL on 2020/2/24 0024.
+ * @param
+ * @author XYL
+ * @date 2020/3/21 17:54
+ * @return
+ * @since V2.0
  */
 public class demo9 {
 

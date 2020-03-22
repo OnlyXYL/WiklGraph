@@ -45,8 +45,6 @@ public class JsonUtils {
 
         try {
 
-            //string = JSON.toJSONString(object);
-
             string = JSONObject.toJSONString(object);
 
         } catch (Exception e) {
@@ -70,10 +68,6 @@ public class JsonUtils {
     public static <T> T parseJsonToObj(String json, Class<T> c) {
 
         try {
-
-            //两个都是可行的，起码我测试的时候是没问题的。
-
-            //JSONObject jsonObject = JSONObject.parseObject(json);
 
             JSONObject jsonObject = JSON.parseObject(json);
 

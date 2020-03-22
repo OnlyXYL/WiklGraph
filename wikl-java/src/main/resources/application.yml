@@ -1,0 +1,27 @@
+server:
+  port: 8767
+  servlet:
+    context-path: /java
+
+spring:
+  application:
+    name: java
+  servlet:
+    multipart:
+      #springboot 2.1 后增加 DataSize ,用来避免数据曝光
+      max-file-size: 104857600
+      max-request-size: 524288000
+
+#存储相关配置
+storage:
+  janusgraph:
+    url: cql:10.0.41.36
+
+## 注册的服务地址 和Eureka Server一样
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  # 这只为prefer ip的话可以直接展示ip地址
+  instance:
+    prefer-ip-address: true

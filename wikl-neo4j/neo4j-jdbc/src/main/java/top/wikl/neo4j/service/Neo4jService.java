@@ -30,7 +30,7 @@ public interface Neo4jService {
     /**
      * 根据深度查询图谱数据
      *
-     * @param
+     * @param inInput
      * @return
      * @author XYL
      * @date 2019/11/11 11:52

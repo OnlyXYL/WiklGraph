@@ -5,7 +5,14 @@ import lombok.Data;
 
 import java.util.Map;
 
-
+/**
+ * 实例点信息
+ * @param
+ * @author XYL
+ * @date 2020/3/21 17:53
+ * @return
+ * @since  V2.0
+ */
 @Data
 public class KgInstanceNode {
 

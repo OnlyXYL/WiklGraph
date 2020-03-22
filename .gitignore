@@ -13,6 +13,7 @@ HELP.md
 
 ### IntelliJ IDEA ###
 .idea
+.github
 *.iws
 *.iml
 *.ipr

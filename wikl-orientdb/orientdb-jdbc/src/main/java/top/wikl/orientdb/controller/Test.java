@@ -68,7 +68,7 @@ public class Test {
         try (ODatabaseSession session = pool.acquire();) {
 
             //查询条件
-            HashMap<String, Object> map = new HashMap<>();
+            HashMap<String, Object> map = new HashMap<>(1);
             map.put("kngraphId", kngraphId);
 
             OResultSet rs = session.query(sql, map);
@@ -90,7 +90,7 @@ public class Test {
         OVertexPageConditon pageConditon = new OVertexPageConditon(Integer.parseInt(count), pageSize);
 
         //关系属性
-        Map<String, Object> hashMap = new HashMap<>();
+        Map<String, Object> hashMap = new HashMap<>(5);
         hashMap.put("date", new Date());
         hashMap.put("name", relationName);
         hashMap.put("instanceLabel", relationLabel);

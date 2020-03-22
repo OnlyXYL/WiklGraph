@@ -3,6 +3,29 @@
 # `背景`
 #### 图谱学习之路，图谱的构建
 
+ > ### 目录结构
+ 
+ ```
+ WiklGraph
+ ├── wikl-cloud
+       ├── wikl-eureka                      #服务注册与发现中心               -->端口：8761
+ ├── wikl-common                            #公共模块
+       ├── common-entity
+       ├── common-util
+       ├── common-neo4
+       ├── common-orientdb
+       ├── common-exception
+ ├── wikl-component                         #系统组件                        -->端口：8768
+ ├── wikl-janusgraph                        #JanusGraph模块                  -->端口：8766
+ ├── wikl-java                              #Java模块                        -->端口：8767
+ ├── wikl-neo4j                             #Neo4j模块                       -->端口：8082
+         ├── neo4j-gremlin                                                   -->端口：8765
+         ├── neo4j-jdbc                                                      -->端口：8764
+ ├── wikl-orientdb                          #OrientDb模块    
+         ├── orientdb-gremlin                                                -->端口：8763
+         ├── orientdb-jdbc                                                   -->端口：8762
+ ├── wikl-portal                            #Portal模块                      -->端口：8081
+
 # `图数据库 `
 
    > OrientDB  

@@ -569,7 +569,7 @@ public class OrientDbFunctionsServiceImpl implements OrientDbFunctionsService {
 
             while (resultSet.hasNext()) {
 
-                Map<String, Object> map = new HashMap<>();
+                Map<String, Object> map = new HashMap<>(16);
 
                 OResult next = resultSet.next();
 
@@ -608,7 +608,7 @@ public class OrientDbFunctionsServiceImpl implements OrientDbFunctionsService {
 
                         for (String property : propertyNames) {
 
-                            if (!property.equals("in") && !property.equals("out")) {
+                            if (!"in".equals(property) && !"out".equals(property)) {
 
                                 Object oVertexProperty = oEdge.getProperty(property);
 

@@ -128,7 +128,7 @@ public class Neo4jServiceImpl implements Neo4jService {
 
                         Iterable<String> keysList = node.keys();
 
-                        Map<String, Object> propertyList = new HashMap<>();
+                        Map<String, Object> propertyList = new HashMap<>(16);
 
                         keysList.forEach((x) -> {
                             propertyList.put(x, node.get(x).asString());

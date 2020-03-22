@@ -1,5 +1,5 @@
 server:
-  port: 8764
+  port: 8766
   servlet:
     context-path: /janusgraph
 

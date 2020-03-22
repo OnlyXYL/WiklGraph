@@ -14,7 +14,14 @@ import java.util.*;
 public class RandomUtils {
     private static Random random;
 
-    //双重校验锁获取一个Random单例
+    /**
+     * 双重校验锁获取一个Random单例
+     * @param
+     * @author XYL
+     * @date 2020/3/21 17:55
+     * @return
+     * @since  V2.0
+     */
     public static Random getRandom() {
         if (random == null) {
             synchronized (RandomUtils.class) {

@@ -33,10 +33,6 @@ public class demo4 {
 
         String url = "remote:119.18.198.137:10600/xyl;remote:119.18.198.137:10601/xyl";
 
-//        OrientGraph graph = new OrientGraph(url, "root", "password");
-//
-//        graph.setConnectionStrategy(OStorageRemote.CONNECTION_STRATEGY.ROUND_ROBIN_REQUEST.toString());
-
         //1. 获取工厂
         OrientGraphFactory factory = new OrientGraphFactory(url);
 

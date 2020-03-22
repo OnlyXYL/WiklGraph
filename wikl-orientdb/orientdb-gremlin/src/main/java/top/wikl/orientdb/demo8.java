@@ -110,12 +110,13 @@ public class demo8 {
             flag = true;
 
             /**
+             *<p>session.addCluster(cluster);</p>
+             *
              * 此方法，在连接6个节点时，执行新建cluster 报错
              *
              * com.orientechnologies.orient.server.distributed.ODistributedException: Error on creating cluster 'person_node104' on distributed nodes: local and remote ids assigned are different
              *
              */
-//            clusterId = session.addCluster(cluster);
 
             OResultSet command = session.command("create cluster " + cluster);
 
@@ -171,17 +172,6 @@ public class demo8 {
         OResultSet resultSet_ = session.command(createVertexSql);
 
         resultSet_.close();
-
-       /* //根据class  执行查询
-        OResultSet resultSet = session.query(sql);
-
-        if (resultSet.hasNext()) {
-
-            System.out.println("有数据！");
-            resultSet.close();
-        } else {
-            System.out.println("没有数据！");
-        }*/
 
         //根据cluster 执行查询
         OResultSet query = session.query("select from cluster:" + cluster);
