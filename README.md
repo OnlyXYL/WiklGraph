@@ -24,6 +24,7 @@
  ├── wikl-orientdb                          #OrientDb模块    
          ├── orientdb-gremlin                                                -->端口：8763
          ├── orientdb-jdbc                                                   -->端口：8762
+         ├── orientdb-spark                                                  -->端口：8769
  ├── wikl-portal                            #Portal模块                      -->端口：8081
 ```
 
