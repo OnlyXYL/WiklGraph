@@ -311,4 +311,12 @@ public class WiklDateUtil {
 
         return dateStr;
     }
+
+    public static String formatDate(Date date, String pattern) {
+        if (date == null) {
+            return null;
+        }
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        return format.format(date);
+    }
 }
