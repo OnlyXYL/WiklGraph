@@ -38,6 +38,7 @@
         <module>wikl-janusgraph</module>
         <module>wikl-component</module>
         <module>wikl-java</module>
+        <module>wikl-scala</module>
     </modules>
 
     <properties>
