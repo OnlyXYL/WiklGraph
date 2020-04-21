@@ -32,7 +32,7 @@ public class PoiController {
         String fileName = WiklDateUtil.formatDate(new Date(), "yyyyMMdd") + ".zip";
 
         //excel文件路径
-        String filePath = "C:\\Users\\XYL\\Desktop\\指标1.xlsx";
+        String filePath = "C:\\Users\\XYL\\Desktop\\知识分类.xlsx";
 
         String sheetName = "指标信息";
 

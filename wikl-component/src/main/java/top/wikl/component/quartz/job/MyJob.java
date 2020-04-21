@@ -5,7 +5,6 @@ import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.springframework.stereotype.Component;
 
 /**
  * @author XYL
@@ -16,7 +15,7 @@ import org.springframework.stereotype.Component;
  * @since V1.0
  */
 @Slf4j
-@Component
+//@Component
 @DisallowConcurrentExecution
 public class MyJob implements Job {
 

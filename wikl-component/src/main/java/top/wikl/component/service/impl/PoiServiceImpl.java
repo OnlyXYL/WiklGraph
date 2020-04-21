@@ -33,9 +33,45 @@ public class PoiServiceImpl implements PoiService {
     @Override
     public byte[] excel(String filePath, String sheetName) {
 
-        byte[] bytes = readExcel(filePath, true, sheetName);
+        byte[] bytes = readExcel(filePath);
 
         return bytes;
+    }
+
+    @Override
+    public byte[] instanceTemplate(String filePath) {
+
+        //1. 需要概念列表【根据概念列表生成实例模板的每个sheet】
+
+        //2. 需要每个概念的属性【根据每个概念的属性，生成实例模板每个sheet中的列】
+
+        //3. 实例数据规则【根据规则处理实例数据】
+
+        //3. 往实例模板中插入数据
+
+        //4. 数据跳过规则【不满足条件的数据，不插入实例模板中】
+
+        //+++++++++++++++++++++++
+
+        //1. 研究对象
+        HashMap<String, String> map = new HashMap<>(15);
+        map.put("57d104b5095b124816eb374a", "盆地");
+        map.put("57d104b5095b124816eb374b", "油气田");
+        map.put("57d104b5095b124816eb374c", "井");
+        map.put("57d104b5095b124816eb374e", "地层");
+        map.put("57d104b5095b124816eb374d", "矿权区");
+        map.put("57d104b5095b124816eb374f", "构造单元");
+        map.put("57d104b5095b124816eb3750", "油气藏");
+        map.put("57d104b5095b124816eb3751", "物化探工区");
+        map.put("5a7d65bc3335733ac5a06d8f", "政治区域");
+        map.put("5a7d65cf3335733ac5a06d90", "开发单元_区块");
+        map.put("5a7d65f63335733ac5a06d91", "工艺_技术");
+        map.put("5a7d660e3335733ac5a06d92", "设备");
+        map.put("5a7d661f3335733ac5a06d93", "工具_仪器");
+        map.put("5a7d66323335733ac5a06d94", "材料");
+        map.put("5a7d663c3335733ac5a06d95", "行政单位");
+
+        return new byte[0];
     }
 
     /**
@@ -48,20 +84,19 @@ public class PoiServiceImpl implements PoiService {
      * @date 2020/4/1 18:27
      * @since V2.0
      */
-    private static byte[] readExcel(String filePath, boolean wirteExcel, String sheetName) {
+    private static byte[] readExcel(String filePath) {
+
+        Map<String, byte[]> downloadMap = new HashMap<>();
+
+        //已经创建过的概念
+        ArrayList<String> used = new ArrayList<>();
 
         byte[] zip = null;
 
-        HSSFWorkbook wk = null;
+        //创建表格
+        HSSFWorkbook wk = new HSSFWorkbook();
 
-        HSSFSheet wSheet = null;
-
-        if (wirteExcel) {
-            //创建表格
-            wk = new HSSFWorkbook();
-
-            wSheet = wk.createSheet(sheetName);
-        }
+        HSSFSheet wSheet;
 
         try {
             //String encoding = "GBK";
@@ -104,29 +139,55 @@ public class PoiServiceImpl implements PoiService {
                     Row row = sheet.getRow(rIndex);
                     if (row != null) {
 
-                        //获取第三列
-                        Cell cell = row.getCell(2);
-                        if (cell != null) {
+                        //获取第二列数据，作为sheet名
+                        Cell rowCell = row.getCell(1);
+
+                        if (rowCell != null) {
 
                             //获取当前行的值
-                            String cellValue = cell.toString();
+                            String cellValue = rowCell.toString();
 
                             System.out.printf("当前行号 【%d】，当前列【%s】，当前值【%s】\n", rIndex, "指标id", cellValue);
 
-                            //写入文件
-                            Integer integer = createRow(wSheet, cellValue, rowNumber);
+                            //如果当前分类已经创建，新增一行到当前sheet
+                            if (!used.contains(cellValue)) {
 
-                            rowNumber = integer;
+                                //使用分类名称作为sheet名
+                                wSheet = wk.createSheet(cellValue);
+
+                                used.add(cellValue);
+
+                                //写入文件
+                                createRow(wSheet, row);
+
+                            }
+
                         }
+
+                        //15行，新创建一个文件
+                        if (rowNumber == 15) {
+
+                            rowNumber = 0;
+
+                            //写入新文件
+                            writeExcel(wk, downloadMap);
+
+                            wk = new HSSFWorkbook();
+                        }
+
                     }
+
+                    rowNumber++;
+
+                }
+
+                if (rowNumber > 0) {
+
+                    writeExcel(wk, downloadMap);
                 }
 
                 //开始写入excel
-                if (wirteExcel) {
-                    Map<String, byte[]> stringMap = writeExcel(wk);
-
-                    zip = FileZip.zip(stringMap);
-                }
+                zip = FileZip.zip(downloadMap);
 
                 System.out.println("+++++++++++++++++ 解析结束 +++++++++++++++++");
 
@@ -148,7 +209,6 @@ public class PoiServiceImpl implements PoiService {
         return zip;
     }
 
-
     /**
      * 设置行
      * <p>
@@ -164,61 +224,55 @@ public class PoiServiceImpl implements PoiService {
      * 5. 写年份
      *
      * @param sheet
-     * @param value
-     * @param count
+     * @param rowdata
      * @return
      * @author XYL
      * @date 2020/4/1 18:35
      * @since V2.0
      */
-    public static Integer createRow(HSSFSheet sheet, String value, int count) {
+    public static void createRow(HSSFSheet sheet, Row rowdata) {
 
-        int rowNum = count;
+        List<String> properties = Arrays.asList(
+                "主键ID",
+                "分类名称",
+                "父分类ID",
+                "发布状态",
+                "序号",
+                "是否包含子节点",
+                "作用对象",
+                "参与对象"
+        );
 
-        //年纪和
-        List<String> yearList = Arrays.asList("2018年", "2019年");
+        HSSFRow head = sheet.createRow(0);
 
-        //月集合
-        List<String> monthList = Arrays.asList("1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月");
+        HSSFRow row = sheet.createRow(1);
 
-        //处理年
-        for (int i = 0; i <= yearList.size() - 1; i++) {
+        for (int i = 0; i <= properties.size() - 1; i++) {
 
-            //获取年
-            String year = yearList.get(i);
+            HSSFCell cell = head.createCell(i);
+            cell.setCellValue(properties.get(i));
 
-            //月
-            for (int j = 0; j <= monthList.size() - 1; j++) {
+            HSSFCell rowCell = row.createCell(i);
 
-                HSSFRow row = sheet.createRow(count);
+            Cell cell1 = rowdata.getCell(i);
 
-                //获取月
-                String month = monthList.get(j);
-
-                HSSFCell name = row.createCell(0);
-                name.setCellValue(value + "_value" + rowNum);
-
-                HSSFCell type = row.createCell(1);
-                type.setCellValue(count);
-
-                HSSFCell sign = row.createCell(2);
-                sign.setCellValue(value);
-
-                HSSFCell month_ = row.createCell(3);
-                month_.setCellValue(month);
-
-                HSSFCell year_ = row.createCell(4);
-                year_.setCellValue(year);
-
-                count++;
-
-                rowNum++;
+            if (Objects.isNull(cell1)) {
+                rowCell.setCellValue("");
+            } else {
+                rowCell.setCellValue(cell1.toString());
             }
-
         }
 
-        return count;
+        //列边界
+        HSSFCell eof = head.createCell(properties.size());
+        eof.setCellValue("#EOF#");
 
+        //行边界
+        HSSFRow reof = sheet.createRow(2);
+
+        HSSFCell cell = reof.createCell(0);
+
+        cell.setCellValue("#EOF#");
     }
 
 
@@ -231,9 +285,7 @@ public class PoiServiceImpl implements PoiService {
      * @date 2020/4/1 19:05
      * @since V2.0
      */
-    public static Map<String, byte[]> writeExcel(HSSFWorkbook wk) {
-
-        Map<String, byte[]> downloadMap = new HashMap<>();
+    public static void writeExcel(HSSFWorkbook wk, Map<String, byte[]> downloadMap) {
 
         byte[] bytes = new byte[0];
 
@@ -247,9 +299,8 @@ public class PoiServiceImpl implements PoiService {
             e.printStackTrace();
         }
 
-        downloadMap.put("" + System.currentTimeMillis() + ".xls", bytes);
+        downloadMap.put("知识分类实例_" + System.currentTimeMillis() + ".xls", bytes);
 
-        return downloadMap;
     }
 
 }

@@ -3,7 +3,6 @@ package top.wikl.component.quartz;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.quartz.*;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
 import javax.annotation.Resource;
@@ -17,7 +16,7 @@ import javax.annotation.Resource;
  * @since V1.0
  */
 @Slf4j
-@Configuration
+//@Configuration
 public class QuartzManage implements QuarztInterface {
 
     @Resource

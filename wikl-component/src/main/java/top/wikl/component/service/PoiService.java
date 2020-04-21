@@ -12,4 +12,15 @@ public interface PoiService {
 
     byte[] excel(String filePath, String sheetName);
 
+    /**
+     * 处理实例数据
+     *
+     * @param
+     * @return
+     * @throws
+     * @author XYL
+     * @date 2020/4/17 13:50
+     * @since V1.1
+     */
+    byte[] instanceTemplate(String filePath);
 }
