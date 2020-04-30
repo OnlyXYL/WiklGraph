@@ -1,4 +1,4 @@
-package top.wikl.orientdb;
+package top.wikl.orientdb.demo;
 
 import com.orientechnologies.orient.client.remote.OStorageRemote;
 import com.orientechnologies.orient.core.config.OContextConfiguration;

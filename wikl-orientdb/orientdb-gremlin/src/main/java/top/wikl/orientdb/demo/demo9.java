@@ -1,4 +1,4 @@
-package top.wikl.orientdb;
+package top.wikl.orientdb.demo;
 
 import com.orientechnologies.orient.core.sql.OCommandSQL;
 import com.tinkerpop.blueprints.impls.orient.OrientDynaElementIterable;

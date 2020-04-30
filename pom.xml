@@ -50,6 +50,11 @@
         <fastjson.version>1.2.60</fastjson.version>
         <hutools.version>4.5.5</hutools.version>
         <lru.version>1.4.2</lru.version>
+        <spring.version>5.2.1.RELEASE</spring.version>
+        <quartz.version>2.3.0</quartz.version>
+        <kafka.version>2.4.0</kafka.version>
+        <javacsv.version>2.0</javacsv.version>
+        <samba.version>1.3.3</samba.version>
     </properties>
 
     <dependencyManagement>

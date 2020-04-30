@@ -1,4 +1,4 @@
-package top.wikl.orientdb;
+package top.wikl.orientdb.demo;
 
 import com.orientechnologies.orient.core.db.ODatabaseSession;
 import com.orientechnologies.orient.core.db.OrientDB;
@@ -10,58 +10,45 @@ import java.util.Objects;
 
 /**
  * 验证：
- * 1：在 10.0.43.101 上新建 cluster  client_node101          create  cluste client_node101
- * 2：在 10.0.43.101 上新建 class     create class person  extends v cluster  client_node101`ID
- * 3：在 10.0.43.101 上 新建点   create vertex person cluster client_node101
- * 4：在101 节点上执行查询
- * 5：在 102，103 节点上执行查询
- * <p>
- * <p>
- * <p>
- * 改进
- * <p>
- * 1)	修改配置文件 增加 client_node106, client_node107, client_node108 cluster 信息
- * 2)	连接101 节点
- * <p>
- * 	创建新的cluster    Create cluster client_node106
- * 	创建class    Create class employee extends v cluster client_node106`ID
- * 	创建点      Create vertex employee cluster client_node106
- * <p>
- * 3)	连接102 节点
- * <p>
- * 	创建新的cluster  Create cluster client_node107
- * 	给class employee 增加新的 cluster   alter class employee addcluster client_node107
- * 	创建点  create vertex employee cluster client_node107
- * <p>
- * <p>
- * 4)	连接103 节点
- * <p>
- * 	操作同102 节点  cluster 为  client_node108
+ * 1：在 102 节点上，创建cluster  client_node102
+ * 2：在 102 节点上，执行 create class city  extends cluster client_node102`Id ;  create vertex  city cluster client_node102
+ * 3：查询看结果
+ * 4：在 102 上，执行 create vertex person cluster client_node101， 查看结果
  *
  * @author XYL
- * @title: Demo1
+ * @title: Demo3
  * @description: TODO
- * @date 2020/2/6 16:05
+ * @date 2020/2/13 16:45
  * @return
  * @since V1.0
  */
-public class Demo1 {
-
+public class Demo3 {
     public static void main(String[] args) {
 
-        OrientDB orient = connect("10.0.43.101");
+        OrientDB orient = connect("10.0.43.102");
 
         ODatabaseSession session = orient.open("xyl", "root", "password");
 
         //2. 建立连接
 //        ODatabasePool pool = new ODatabasePool(orient, "xyl", "root", "password");
 
-        String cluster = "client_node106";
+        String cluster = "client_node102";
 
-        String aClass = "employee";
+        String aClass = "city";
 
-        //1. 查询
+        //1. 102相关操作
         execute(session, aClass, cluster);
+
+        //101相关操作
+        String cluster_ = "client_node101";
+
+        String aClass_ = "person";
+
+        //1. 102相关操作
+//        execute(session, aClass_, cluster_);
+
+        session.close();
+
     }
 
     /**
@@ -77,7 +64,7 @@ public class Demo1 {
 
         String _url = "remote:" + url;
 
-//        _url = "remote:10.0.43.101,remote:10.0.43.102,remote:10.0.43.103,remote:10.0.43.104,remote:10.0.43.105,remote:10.0.43.106";
+        _url = "remote:10.0.43.102,remote:10.0.43.101,remote:10.0.43.103,remote:10.0.43.104,remote:10.0.43.105,remote:10.0.43.106";
 
         //1.创建客户端
         OrientDB orient = new OrientDB(_url, OrientDBConfig.defaultConfig());
@@ -100,8 +87,6 @@ public class Demo1 {
 
         String sql = "select from " + aClass;
 
-        //查询数据
-
         //判断cluster 是否存在
         boolean exit = session.existsCluster(cluster);
 
@@ -122,8 +107,6 @@ public class Demo1 {
         boolean exit_ = session.existsCluster(cluster);
 
         System.out.println("是否存在cluster: " + exit_);
-
-        clusterId = session.getClusterIdByName(cluster);
 
         //判断是否存在class
         OClass oClass = session.getClass(aClass);
@@ -157,8 +140,6 @@ public class Demo1 {
         //根据class  执行查询
         OResultSet resultSet = session.query(sql);
 
-        session.getLocalCache().invalidate();
-
         if (resultSet.hasNext()) {
 
             System.out.println("有数据！");
@@ -176,9 +157,6 @@ public class Demo1 {
         } else {
             System.out.println("没有数据！");
         }
-
-        session.close();
-
     }
 
 }
