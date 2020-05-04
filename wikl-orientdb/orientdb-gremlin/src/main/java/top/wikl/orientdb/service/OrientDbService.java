@@ -1,7 +1,5 @@
 package top.wikl.orientdb.service;
 
-import org.apache.tinkerpop.gremlin.structure.T;
-
 /**
  * orientdb 服务接口
  *
@@ -25,5 +23,5 @@ public interface OrientDbService<R> {
      */
     R graph(boolean transaction);
 
-    void createIndex(String indexKey,);
+    void createIndex(String indexKey);
 }
