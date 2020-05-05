@@ -1,13 +1,9 @@
 package top.wikl.utils.system;
 
 import lombok.Data;
-import top.wikl.entity.graph.show.ColorMap;
-import top.wikl.entity.graph.show.ColorRange;
-import top.wikl.utils.application.ApplicationContextUtil;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 图谱节点工具类
@@ -100,35 +96,7 @@ public class WiklGraphNodeUtils {
      */
     public static Integer nodeColor(String label) {
 
-        ColorRange colorRange = ApplicationContextUtil.getApplicationContext().getBean(ColorRange.class);
-
-        List<Integer> colorRanges = colorRange.getColorRanges();
-
-        Integer range = colorRange.getCurrentRange();
-
-        ColorMap colorMap1 = ApplicationContextUtil.getApplicationContext().getBean(ColorMap.class);
-
-        Map<String, Integer> colorMap = colorMap1.getColorMap();
-
-        if (colorMap.containsKey(label)) {
-            range = colorMap.get(label);
-        } else {
-
-            //判断级别是否满足要求
-            if (range < Collections.max(colorRanges)) {
-                //当前已分配级别
-                range++;
-
-            } else {
-                range = 1;
-            }
-
-            colorRange.setCurrentRange(range);
-
-            colorMap.put(label, range);
-        }
-
-        return range;
+        return 0;
 
     }
 
