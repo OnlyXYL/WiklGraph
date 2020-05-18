@@ -109,21 +109,25 @@ public class EntityDicProcess extends AbstractDicHandler<GetDicInput, GetDicOutP
 
                         OVertex oVertex = optionalOVertex.get();
 
-                        //显示属性
-                        String markPro = labelMarkMap.get(oVertex.getProperty("label"));
+                        String label = oVertex.getProperty("label").toString();
 
-                        //显示属性对应的值
-                        String marProValue = null;
-                        try {
-                            marProValue = oVertex.getProperty(markPro).toString();
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        if (!label.startsWith("Concept")) {
+                            //显示属性
+                            String markPro = labelMarkMap.get(oVertex.getProperty("label"));
 
-                            System.out.println(oVertex.toString());
+                            //显示属性对应的值
+                            String marProValue = null;
+                            try {
+                                marProValue = oVertex.getProperty(markPro).toString();
+                            } catch (Exception e) {
+                                e.printStackTrace();
 
+                                System.out.println(oVertex.toString());
+
+                            }
+
+                            set.add(marProValue + " " + marProValue);
                         }
-
-                        set.add(marProValue + " " + marProValue);
                     }
                 }
 

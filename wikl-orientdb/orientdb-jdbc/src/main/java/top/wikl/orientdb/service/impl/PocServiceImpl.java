@@ -6,12 +6,11 @@ import top.wikl.orientdb.model.GetDicInput;
 import top.wikl.orientdb.model.KgGetLabelAndMark;
 import top.wikl.orientdb.service.PocService;
 import top.wikl.orientdb.service.impl.dic.DicHandler;
-import top.wikl.orientdb.utils.WiklGraphLabelUtils;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author XYL
@@ -37,13 +36,7 @@ public class PocServiceImpl implements PocService {
 
             List<KgGetLabelAndMark> labelAndMark = kgConceptMapper.getLabelAndMark(getDicInput.getGraphId());
 
-            Map<String, String> labelMarkMap = new HashMap<>(labelAndMark.size() + 1);
-
-            if (labelMarkMap != null) {
-                labelAndMark.forEach(en -> labelMarkMap.put(en.getLabel(), en.getMarkProperty()));
-            }
-
-            labelMarkMap.put(WiklGraphLabelUtils.getConceptSchema(getDicInput.getGraphId()), "name");
+            Map<String, String> labelMarkMap = labelAndMark.stream().collect(Collectors.toMap(KgGetLabelAndMark::getLabel, KgGetLabelAndMark::getMarkProperty));
 
             getDicInput.setLabelMarkMap(labelMarkMap);
 

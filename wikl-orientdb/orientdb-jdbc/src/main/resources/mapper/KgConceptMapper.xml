@@ -3,10 +3,10 @@
 <mapper namespace="top.wikl.orientdb.mapper.KgConceptMapper">
 
     <select id="getLabelAndMark" resultType="top.wikl.orientdb.model.KgGetLabelAndMark">
-        select distinct label, spell as markProperty, nodeColor, nodeSize from
-            (select conceptId, spell from kg_property where conceptId in (select conceptId from kg_concept where kg_concept.deleted = 0 and graphId = #{graphId}) and deleted = 0 and markProperty = 1) as property,
-            (select conceptId, label, nodeColor, nodeSize from kg_concept where graphId = #{graphId} and deleted = 0) as concept
-        where property.conceptId = concept.conceptId;
+        select distinct c.label, p.spell as markProperty, c.nodeColor, c.nodeSize
+        from kg_concept c inner join kg_property p on (c.conceptId = p.conceptId)
+        where c.graphId = #{graphId} and c.deleted = 0 and c.parent_concept = 0
+            and p.deleted = 0 and p.markProperty = 1
     </select>
 
 </mapper>
