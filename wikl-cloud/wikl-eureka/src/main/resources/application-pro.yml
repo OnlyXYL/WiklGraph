@@ -1,0 +1,36 @@
+server:
+  port: 8762
+  servlet:
+    context-path: /wikl-eureka
+
+spring:
+  application:
+    name: wikl-eureka
+  # 开启认证之后会报错，原因：eureka开启安全策略后，在新版本的security中，添加了csrf过滤,csrf将微服务的注册也给过滤了！
+  security:
+    user:
+      name: admin
+      password: admin
+  #配置之刷新静态资源，不刷新后台代码
+  devtools:
+    remote:
+      restart:
+        enabled: false
+
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+
+   # 关闭自我保护模式（缺省为打开）
+    enable-self-preservation: false
+  client:
+#    refresh:
+#      enable: true
+    #   服务器端不注册eureka(默认true)
+    register-with-eureka: false
+    #   服务器端不需要抓取服务列表(默认true)
+    fetch-registry: false
+    serviceUrl:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
+

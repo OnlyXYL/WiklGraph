@@ -1,11 +1,16 @@
 server:
-  port: 8761
+  port: 8763
   servlet:
     context-path: /wikl-eureka
 
 spring:
   application:
     name: wikl-eureka
+  # 开启认证之后会报错，原因：eureka开启安全策略后，在新版本的security中，添加了csrf过滤,csrf将微服务的注册也给过滤了！
+  security:
+    user:
+      name: admin
+      password: admin
   #配置之刷新静态资源，不刷新后台代码
   devtools:
     remote:
@@ -26,9 +31,9 @@ eureka:
   # 是否需要把Eureka也注册为一个Client 如果需要注册为client register-with-eureka:这里设置为true
   # 如果仅仅运行Standalone Mode的话，这里设置为false即可
   # fetch-registry的定义参看下面的英文解释
-  server:
-    # 关闭自我保护模式（缺省为打开）
-    enable-self-preservation: false
+#  server:
+#    # 关闭自我保护模式（缺省为打开）
+#    enable-self-preservation: false
   client:
 #    refresh:
 #      enable: true
@@ -37,5 +42,5 @@ eureka:
     #   服务器端不需要抓取服务列表(默认true)
     fetch-registry: false
     serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
 

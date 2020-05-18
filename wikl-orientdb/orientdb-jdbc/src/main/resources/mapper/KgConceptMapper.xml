@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.wikl.orientdb.mapper.KgConceptMapper">
+
+    <select id="getLabelAndMark" resultType="top.wikl.orientdb.model.KgGetLabelAndMark">
+        select distinct label, spell as markProperty, nodeColor, nodeSize from
+            (select conceptId, spell from kg_property where conceptId in (select conceptId from kg_concept where kg_concept.deleted = 0 and graphId = #{graphId}) and deleted = 0 and markProperty = 1) as property,
+            (select conceptId, label, nodeColor, nodeSize from kg_concept where graphId = #{graphId} and deleted = 0) as concept
+        where property.conceptId = concept.conceptId;
+    </select>
+
+</mapper>

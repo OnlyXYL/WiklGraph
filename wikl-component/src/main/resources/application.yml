@@ -22,19 +22,12 @@ graph:
     passWord: ztshare
     filePath: /share/夏亚岭/
     graphIds: {982: {1,主键Id},991: {1,主键Id}}
-#    graphIds:
-#    - 982
-#    - 991
 
 eureka:
-  client:
-    service-url: http://localhost:8761/eureka/
-  # 这只为prefer ip的话可以直接展示ip地址
   instance:
+    hostname: localhost
+    #显示ip
     prefer-ip-address: true
-
-# 日志配置
-#logging:
-#  level: debug
-#  pattern:
-#    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+  client:
+    serviceUrl:
+      defaultZone: http://admin:admin@${eureka.instance.hostname}:8761/eureka/

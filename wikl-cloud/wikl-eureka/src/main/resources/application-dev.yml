@@ -11,21 +11,12 @@ spring:
     remote:
       restart:
         enabled: false
-#  freemarker:
-#    template-loader-path: classpath:/templates/
-#    prefer-file-system-access: false
-# Eureka 服务的hostname
+
 eureka:
   instance:
     hostname: localhost
     prefer-ip-address: true
-    #不起作用
-    #status-page-url: ${server.servlet.context-path}/info
-    #secure-health-check-url: ${server.servlet.context-path}/health
 
-  # 是否需要把Eureka也注册为一个Client 如果需要注册为client register-with-eureka:这里设置为true
-  # 如果仅仅运行Standalone Mode的话，这里设置为false即可
-  # fetch-registry的定义参看下面的英文解释
   server:
     # 关闭自我保护模式（缺省为打开）
     enable-self-preservation: false
@@ -38,4 +29,3 @@ eureka:
     fetch-registry: false
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
-
