@@ -45,7 +45,7 @@ public class PocController {
 
         dicInput.setDicType(DicType.getEnumByKey(dicType));
 
-        dicInput.setFilePath("E:\\work\\工作\\SmartKG\\开发\\数据\\国家电网\\变电最终数据\\最终数据\\缺陷库\\智通缺陷库相关字典\\");
+        dicInput.setFilePath("E:\\work\\工作\\SmartKG\\开发\\数据\\国家电网\\变电最终数据\\最终数据\\管理\\字典\\");
 
         dicInput.setSuffix("dic");
 

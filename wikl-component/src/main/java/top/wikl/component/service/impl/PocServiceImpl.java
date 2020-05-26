@@ -152,8 +152,10 @@ public class PocServiceImpl implements PocService {
 
                                 if (StringUtils.isNotBlank(cellValue)) {
                                     set.add(cellValue);
-                                    map.put(stringCellValue, set);
+
                                 }
+
+                                map.put(stringCellValue, set);
 
                             } else {
 
@@ -161,8 +163,9 @@ public class PocServiceImpl implements PocService {
                                 if (!strings.contains(cellValue)&&!strings.contains(stringCellValue)) {
                                     if (StringUtils.isNotBlank(cellValue)) {
                                         strings.add(cellValue);
-                                        map.put(stringCellValue, strings);
+
                                     }
+                                    map.put(stringCellValue, strings);
                                 }
                             }
                             System.out.printf("当前行号 【%d】，当前列【%s】，当前值【%s】\n", rIndex, ScolumnIndex, stringCellValue);

@@ -7,6 +7,7 @@ import com.orientechnologies.orient.core.record.OVertex;
 import com.orientechnologies.orient.core.sql.executor.OResult;
 import com.orientechnologies.orient.core.sql.executor.OResultInternal;
 import com.orientechnologies.orient.core.sql.executor.OResultSet;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import top.wikl.orientdb.enums.DicType;
 import top.wikl.orientdb.model.GetDicInput;
@@ -116,17 +117,11 @@ public class EntityDicProcess extends AbstractDicHandler<GetDicInput, GetDicOutP
                             String markPro = labelMarkMap.get(oVertex.getProperty("label"));
 
                             //显示属性对应的值
-                            String marProValue = null;
-                            try {
-                                marProValue = oVertex.getProperty(markPro).toString();
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                            String marProValue = oVertex.getProperty(markPro) + "";
 
-                                System.out.println(oVertex.toString());
-
+                            if (StringUtils.isNotBlank(marProValue)) {
+                                set.add(marProValue + " " + marProValue);
                             }
-
-                            set.add(marProValue + " " + marProValue);
                         }
                     }
                 }

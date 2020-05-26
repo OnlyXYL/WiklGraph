@@ -94,6 +94,12 @@
             <version>${poi.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-scratchpad</artifactId>
+            <version>3.12</version>
+        </dependency>
+
         <!--quartz-->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -116,6 +122,12 @@
             <groupId>org.samba.jcifs</groupId>
             <artifactId>jcifs</artifactId>
             <version>${samba.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jacob</groupId>
+            <artifactId>jacob</artifactId>
+            <version>1.10</version>
         </dependency>
 
     </dependencies>
