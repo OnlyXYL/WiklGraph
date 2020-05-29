@@ -13,3 +13,4 @@ logging:
   file:
     max-size: 10MB
     name: eureka_log.txt
+    path: ./log

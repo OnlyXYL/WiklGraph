@@ -19,6 +19,7 @@ HELP.md
 *.ipr
 *.mvn
 *.txt
+log/
 
 ### NetBeans ###
 /nbproject/private/

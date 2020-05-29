@@ -3,6 +3,7 @@ package top.wikl.component;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
 /**
  * @author XYL
  * @title: ComponentApplication
@@ -11,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @return
  * @since V1.0
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"top.wikl.*","top.wikl.component.*"})
 public class ComponentApplication {
 
     public static void main(String[] args) {

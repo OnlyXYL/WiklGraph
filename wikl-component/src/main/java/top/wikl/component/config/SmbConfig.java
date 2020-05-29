@@ -22,7 +22,7 @@ import java.util.Map;
  */
 @Conditional(SmbCondition.class)
 @ConfigurationProperties(prefix = "graph.special", ignoreUnknownFields = false)
-@PropertySource(value = {"classpath:application.yml"}, encoding = "utf-8")
+@PropertySource(value = {"classpath:application-${spring.profiles.active}.yml"}, encoding = "utf-8")
 @Slf4j
 @Data
 @Component
