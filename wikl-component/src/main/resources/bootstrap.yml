@@ -5,6 +5,14 @@ spring:
     config:
       # 解决添加配置中心依赖，但是没有配置中心，或者连不通时，控制台报错问题； true 启用配置中心，false 不启用
       enabled: false
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://localhost:8770
 
 log:
   console:

@@ -26,6 +26,8 @@
          ├── orientdb-jdbc                                                   -->端口：8762
          ├── orientdb-spark                                                  -->端口：8769
  ├── wikl-portal                            #Portal模块                      -->端口：8081
+ ├── wikl-elk
+         ├── wikl-zipkin    8770  
 ```
 
 # `图数据库 `
