@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * 记录信息:</br> 访问时间</br>Controller路径</br>对应方法名</br>请求参数信息</br>请求相对路径</br>请求处理时长
@@ -67,16 +68,20 @@ public class WiklPrintLogInterceptor implements HandlerInterceptor {
 
             HandlerMethod h = (HandlerMethod) handler;
 
-            ApiOperation apiOperation = h.getMethodAnnotation(ApiOperation.class);
-
-
             //获取ip地址
             String ip = getIpAddress();
 
             sb.append("【 I  P 】：").append(ip).append("\n");
 
-            String value = apiOperation.value();
-            sb.append("【功能】：").append(value).append("\n");
+            ApiOperation apiOperation = h.getMethodAnnotation(ApiOperation.class);
+
+            if (Objects.isNull(apiOperation)) {
+                sb.append("【功能】：").append("\n");
+            }else{
+                String value = apiOperation.value();
+                sb.append("【功能】：").append(value).append("\n");
+            }
+
             sb.append("【接口】：").append(requestURI).append("\n");
             sb.append("【标识】：").append(sessionId).append("\n");
             sb.append("【类名】：").append(h.getBean().getClass().getName()).append("\n");

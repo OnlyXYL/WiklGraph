@@ -1,23 +1,23 @@
-package top.wikl.component;
+package top.wikl;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
-
 /**
  * @author XYL
- * @title: ComponentApplication
+ * @title: TraceaApplication
  * @description: TODO
- * @date 2019/12/17 14:24
+ * @date 2020/5/31 16:05
  * @return
  * @since V1.0
  */
 @EnableEurekaClient
-@SpringBootApplication(scanBasePackages = {"top.wikl.*","top.wikl.component.*"})
-public class ComponentApplication {
+@SpringBootApplication
+public class TraceaApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ComponentApplication.class, args);
+        SpringApplication.run(TraceaApplication.class);
     }
+
 }

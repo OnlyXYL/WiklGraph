@@ -1,7 +1,7 @@
 server:
   port: 8761
-  servlet:
-    context-path: /wikl-eureka
+#  servlet:
+#    context-path: /wikl-eureka
 
 spring:
   application:
@@ -11,6 +11,10 @@ spring:
     remote:
       restart:
         enabled: false
+  security:
+    user:
+      name: admin
+      password: admin
 
 eureka:
   instance:
@@ -28,4 +32,4 @@ eureka:
     #   服务器端不需要抓取服务列表(默认true)
     fetch-registry: false
     serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/

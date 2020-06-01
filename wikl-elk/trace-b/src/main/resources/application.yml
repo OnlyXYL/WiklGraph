@@ -1,27 +1,32 @@
-server:
-  port: 8770
-  servlet:
-    context-path: /wikl-zipkin
-
 spring:
   application:
-    name: wikl-zipkin
+    name: trace-b
   cloud:
     loadbalancer:
       ribbon:
         enabled: false
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://localhost:8770
   security:
     user:
       name: admin
       password: admin
 
-# 注册的服务地址 和Eureka Server一样
+server:
+  port: 8772
+  servlet:
+    context-path: /trace-b
+
 eureka:
-  # 这只为prefer ip的话可以直接展示ip地址
   instance:
     prefer-ip-address: true
     hostname: localhost
   client:
-    serviceUrl:
+    service-url:
       defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:8761/eureka/
-    fetch-registry: true

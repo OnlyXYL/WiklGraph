@@ -11,6 +11,10 @@ spring:
       #springboot 2.1 后增加 DataSize ,用来避免数据曝光
       max-file-size: 104857600
       max-request-size: 524288000
+  security:
+    user:
+      name: admin
+      password: admin
 
 # 图谱生成配置，1：生成概念图 2：生成实例图  3：概念和实例
 graph:
@@ -31,7 +35,7 @@ eureka:
     prefer-ip-address: true
   client:
     serviceUrl:
-      defaultZone: http://admin:admin@${eureka.instance.hostname}:8761/eureka/
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:8761/eureka/
 
 #日志配置
 logging:
