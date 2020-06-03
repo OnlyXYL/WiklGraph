@@ -15,6 +15,11 @@ spring:
     user:
       name: admin
       password: admin
+  elasticsearch:
+    rest:
+      uris: http://10.0.50.150:49300
+      username: elastic
+      password: Bmsmart_2020
 
 # 图谱生成配置，1：生成概念图 2：生成实例图  3：概念和实例
 graph:
@@ -27,6 +32,11 @@ graph:
     filePath: /share/夏亚岭/
     graphIds: {982: {1,主键Id},991: {1,主键Id}}
 
+elastic:
+  host: 10.0.50.150
+  port: 49200
+  username: elastic
+  password: Bmsmart_2020
 
 eureka:
   instance:
