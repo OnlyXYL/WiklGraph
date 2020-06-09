@@ -134,7 +134,7 @@ public interface OrientDbFunctionsService {
      * <p>
      * inV()
      *
-     * @param
+     * @param inVInput
      * @return
      * @author XYL
      * @date 2019/10/14 17:21

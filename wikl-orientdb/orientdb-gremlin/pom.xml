@@ -40,10 +40,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.orientechnologies</groupId>
-            <artifactId>orientdb-graphdb</artifactId>
-            <version>3.0.27</version>
-            <scope>compile</scope>
+            <groupId>top.wikl</groupId>
+            <artifactId>wikl-java</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
     </dependencies>

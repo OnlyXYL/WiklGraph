@@ -26,15 +26,15 @@ public class Neo4jDriverConfig {
     private Neo4jPropertyConfig neo4jPropertyConfig;
 
     @Bean
-    public Driver driver(){
+    public Driver driver() {
 
         /**
          * 配置信息
          */
         Config config = Config.builder()
-                .withMaxConnectionLifetime( 30, TimeUnit.MINUTES )
-                .withMaxConnectionPoolSize( 50 )
-                .withConnectionAcquisitionTimeout( 2, TimeUnit.MINUTES )
+                .withMaxConnectionLifetime(30, TimeUnit.MINUTES)
+                .withMaxConnectionPoolSize(50)
+                .withConnectionAcquisitionTimeout(2, TimeUnit.MINUTES)
 
                 /**
                  * During a TLS handshake, the server provides a certificate to the client application. The application can choose to accept or reject this certificate based on one of the following trust strategies:
@@ -48,10 +48,10 @@ public class Neo4jDriverConfig {
                  * TRUST_SYSTEM_CA_SIGNED_CERTIFICATES  ----------   Accept any certificate that can be verified against the system store.
                  *
                  */
-                .withTrustStrategy( Config.TrustStrategy.trustAllCertificates() )
+                .withTrustStrategy(Config.TrustStrategy.trustAllCertificates())
                 .build();
 
-        Driver driver = GraphDatabase.driver(neo4jPropertyConfig.getUrl(), AuthTokens.basic(neo4jPropertyConfig.getUserName(), neo4jPropertyConfig.getPassword()),config);
+        Driver driver = GraphDatabase.driver(neo4jPropertyConfig.getUrl(), AuthTokens.basic(neo4jPropertyConfig.getUserName(), neo4jPropertyConfig.getPassword()), config);
 
         return driver;
     }

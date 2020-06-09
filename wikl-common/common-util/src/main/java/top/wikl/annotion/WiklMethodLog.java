@@ -1,5 +1,7 @@
 package top.wikl.annotion;
 
+import top.wikl.enums.log.LogLevel;
+
 import java.lang.annotation.*;
 
 /**
@@ -24,4 +26,18 @@ import java.lang.annotation.*;
 public @interface WiklMethodLog {
 
     String value() default "";
+
+    /**
+     * 描述信息
+     *
+     * @return
+     */
+    String description() default "";
+
+    /**
+     * 日志级别
+     *
+     * @return
+     */
+    LogLevel level();
 }

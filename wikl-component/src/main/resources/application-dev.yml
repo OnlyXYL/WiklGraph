@@ -1,0 +1,52 @@
+server:
+  port: 8768
+  servlet:
+    context-path: /wikl-component
+
+spring:
+  application:
+    name: wikl-component
+  servlet:
+    multipart:
+      #springboot 2.1 后增加 DataSize ,用来避免数据曝光
+      max-file-size: 104857600
+      max-request-size: 524288000
+  security:
+    user:
+      name: admin
+      password: admin
+  elasticsearch:
+    rest:
+      uris: http://10.0.50.150:49300
+      username: elastic
+      password: Bmsmart_2020
+
+# 图谱生成配置，1：生成概念图 2：生成实例图  3：概念和实例
+graph:
+  special:
+    # 特殊处理开关  true 开启； false 不开启
+    open: true
+    hostIP: 10.0.43.91
+    userName: ztshare
+    passWord: ztshare
+    filePath: /share/夏亚岭/
+    graphIds: {982: {1,主键Id},991: {1,主键Id}}
+
+elastic:
+  host: 10.0.50.150
+  port: 49200
+  username: elastic
+  password: Bmsmart_2020
+
+eureka:
+  instance:
+    hostname: localhost
+    #显示ip
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:8761/eureka/
+
+#日志配置
+logging:
+  config: classpath:logConfig.xml

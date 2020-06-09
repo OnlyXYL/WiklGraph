@@ -21,14 +21,6 @@ public class JanusGraphDriverConfig {
 
         JanusGraph graph = JanusGraphFactory.open("cql:10.0.41.22");
 
-//        JanusGraphManagement mgmt = graph.openManagement();
-//        VertexLabel person = mgmt.makeVertexLabel("person").make();
-//        PropertyKey name = mgmt.makePropertyKey("name").make();
-//
-//        mgmt.addProperties(person, name);
-//
-//        GraphTraversalSource g = open.traversal();
-
         return graph;
 
     }

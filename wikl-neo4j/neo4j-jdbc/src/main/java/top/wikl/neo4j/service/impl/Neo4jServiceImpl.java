@@ -10,6 +10,7 @@ import top.wikl.annotion.WiklMethodLog;
 import top.wikl.entity.graph.input.InInput;
 import top.wikl.entity.graph.output.WiklNodeInfo;
 import top.wikl.entity.graph.output.WiklResultData;
+import top.wikl.enums.log.LogLevel;
 import top.wikl.neo4j.service.Neo4jService;
 import top.wikl.properties.PropertiesUtil;
 
@@ -48,7 +49,7 @@ public class Neo4jServiceImpl implements Neo4jService {
     @Resource
     private Driver driver;
 
-    @WiklMethodLog
+    @WiklMethodLog(description = "查询单个点",level = LogLevel.DEBUG)
     @Override
     public List<WiklNodeInfo> searchOneNode(InInput inInput) {
 
@@ -128,7 +129,7 @@ public class Neo4jServiceImpl implements Neo4jService {
 
                         Iterable<String> keysList = node.keys();
 
-                        Map<String, Object> propertyList = new HashMap<>();
+                        Map<String, Object> propertyList = new HashMap<>(16);
 
                         keysList.forEach((x) -> {
                             propertyList.put(x, node.get(x).asString());

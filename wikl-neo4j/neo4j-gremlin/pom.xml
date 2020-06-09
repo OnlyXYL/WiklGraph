@@ -13,7 +13,6 @@
     <artifactId>neo4j-gremlin</artifactId>
 
     <dependencies>
-
         <!--===================================公共模块===============================-->
         <dependency>
             <groupId>top.wikl</groupId>

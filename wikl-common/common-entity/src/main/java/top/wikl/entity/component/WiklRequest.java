@@ -1,12 +1,11 @@
 package top.wikl.entity.component;
 
 /**
- * 
- * @param  
- * @author XYL 
+ * @param
+ * @author XYL
  * @date 2019/12/17 15:33
- * @return  
- * @since  V1.0
+ * @return
+ * @since V1.0
  */
 public class WiklRequest {
 

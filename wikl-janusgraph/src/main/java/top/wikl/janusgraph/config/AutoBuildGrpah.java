@@ -28,7 +28,7 @@ public class AutoBuildGrpah {
 
     public static void main(String[] args) {
 
-       SimpleDateFormat format = new SimpleDateFormat("yyyyMd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMd");
 
 
         String format1 = format.format(new Date());
@@ -92,10 +92,7 @@ public class AutoBuildGrpah {
             InputStream input = new FileInputStream(file);
             OutputStream os = fileItem.getOutputStream();
             IOUtils.copy(input, os);
-            // Or faster..
-            // IOUtils.copy(new FileInputStream(file), fileItem.getOutputStream());
         } catch (IOException ex) {
-            // do something.
         }
 
         MultipartFile multipartFile = new CommonsMultipartFile(fileItem);

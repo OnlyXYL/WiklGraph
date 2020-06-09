@@ -16,11 +16,12 @@ import java.util.Map;
 
 /**
  * orientdb
+ *
  * @param
  * @author XYL
  * @date 2019/9/27 13:51
  * @return
- * @since  V1.0
+ * @since V1.0
  */
 public interface OrientdbQueryService {
 

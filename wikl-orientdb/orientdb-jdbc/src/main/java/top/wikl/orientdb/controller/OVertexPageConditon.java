@@ -53,12 +53,12 @@ public class OVertexPageConditon {
         this.pageSize = pageSize;
 
         //totalPage 总页数
-        if(total%pageSize==0){
+        if (total % pageSize == 0) {
             //说明整除，正好每页显示pageSize条数据，没有多余一页要显示少于pageSize条数据的
             this.totalPage = total / pageSize;
-        }else{
+        } else {
             //不整除，就要在加一页，来显示多余的数据。
-            this.totalPage = total / pageSize +1;
+            this.totalPage = total / pageSize + 1;
         }
 
     }

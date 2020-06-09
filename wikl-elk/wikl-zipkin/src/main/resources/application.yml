@@ -1,0 +1,27 @@
+server:
+  port: 8770
+  servlet:
+    context-path: /wikl-zipkin
+
+spring:
+  application:
+    name: wikl-zipkin
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+  security:
+    user:
+      name: admin
+      password: admin
+
+# 注册的服务地址 和Eureka Server一样
+eureka:
+  # 这只为prefer ip的话可以直接展示ip地址
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:8761/eureka/
+    fetch-registry: true

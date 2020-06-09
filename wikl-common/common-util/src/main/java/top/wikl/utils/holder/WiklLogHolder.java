@@ -12,15 +12,15 @@ public class WiklLogHolder {
 
     private static final ThreadLocal<Long> timeThreadLocal = new ThreadLocal<>();
 
-    public static void set(Long time){
+    public static void set(Long time) {
         timeThreadLocal.set(time);
     }
 
-    public static Long get(){
+    public static Long get() {
         return timeThreadLocal.get();
     }
 
-    public static void remove(){
+    public static void remove() {
         timeThreadLocal.remove();
     }
 

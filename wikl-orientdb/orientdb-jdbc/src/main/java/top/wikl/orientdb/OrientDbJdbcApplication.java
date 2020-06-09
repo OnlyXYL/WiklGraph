@@ -14,6 +14,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class OrientDbJdbcApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(OrientDbJdbcApplication.class,args);
+        SpringApplication.run(OrientDbJdbcApplication.class, args);
     }
 }
