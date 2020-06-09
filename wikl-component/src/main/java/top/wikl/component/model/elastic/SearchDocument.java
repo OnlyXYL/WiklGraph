@@ -3,7 +3,7 @@ package top.wikl.component.model.elastic;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Map;
 
 /**
  * @author XYL
@@ -16,9 +16,18 @@ import java.util.List;
 @Data
 public class SearchDocument implements Serializable {
 
-    private List<String> indices;
+    /**
+     * 索引
+     */
+    private String index;
 
-    private String key;
+    /**
+     * <index,<key,content>>
+     * 搜索信息
+     */
+    private Map<String, String> searchContent;
 
-    private String value;
+    private int from;
+
+    private int size;
 }
