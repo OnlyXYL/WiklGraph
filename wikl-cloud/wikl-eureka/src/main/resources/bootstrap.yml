@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: dev
+  cloud:
+    #Ribbon 负载均衡正在维护，使用 loadBalancer
+    loadbalancer:
+      ribbon:
+        enabled: false
+    config:
+      # 解决添加配置中心依赖，但是没有配置中心，或者连不通时，控制台报错问题； true 启用配置中心，false 不启用
+      enabled: false
+logging:
+  file:
+    max-size: 10MB
+    name: eureka_log.txt
+    path: ./log

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,49 +27,45 @@ import java.util.Map;
 public class WiklNodeInfo implements Serializable {
 
     /**
+     * 节点名称
+     */
+    private String nodeName;
+
+    /**
+     * 节点标签
+     */
+    private String label;
+
+    /**
+     * 实例节点标签
+     */
+    private String instanceLabel;
+
+    private Integer nodeSize;
+
+    private Long nodeColor;
+
+    private Boolean parentNode;
+
+    /**
+     * labels
+     */
+    @ApiModelProperty(value = "标签集合")
+    private List<String> labels;
+
+    /**
      * 节点id
      */
     @ApiModelProperty(value = "节点id")
     private String id;
 
     /**
-     * 节点名称
+     * 属性集合
      */
-    @ApiModelProperty(value = "节点名称")
-    private String nodeName;
+    @ApiModelProperty(value = "属性集合")
+    private Map<String, Object> properties;
 
-    /**
-     * 节点label
-     */
-    @ApiModelProperty(value = "节点label")
-    private String label;
-
-    /**
-     * 节点所属实例label
-     */
-    @ApiModelProperty(value = "节点所属实例label")
-    private String instanceLabel;
-
-    /**
-     * 是否是父节点
-     */
-    @ApiModelProperty(value = "是否是父节点")
-    private boolean parentNode;
-
-    private long nodeSize = 1;
-
-    private long nodeColor;
-
-    /**
-     * 创建时间
-     */
-    @ApiModelProperty(value = "创建时间")
     private Date createDate;
-
-    /**
-     * 其他数据，eg 单个属性值
-     */
-    private Map<String, Object> others;
 
     @Override
     public boolean equals(Object o) {

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+
+    <!--设置上下文名称-->
+    <contextName>wikl-component</contextName>
+    <property name="LOG_ERROR_PATH" value="./log/error"/>
+    <property name="contextName" value="wikl-component"/>
+    <springProperty scope="context" name="logConsoleLevel" source="log.console.level"/>
+    <springProperty scope="context" name="logFileLevel" source="log.file.level"/>
+    <springProperty scope="context" name="logFilePath" source="log.file.path"/>
+    <springProperty scope="context" name="logFileHistory" source="log.file.history"/>
+    <springProperty scope="context" name="logFileSize" source="log.file.fileSize"/>
+    <springProperty scope="context" name="logFileTotalSize" source="log.file.totalSize"/>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+             <level>ERROR</level>
+         </filter>-->
+        <encoder>
+            <pattern>[%d{HH:mm:ss.SSS}] [%contextName] [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--输出到控制台：controller 层的日志输出格式-->
+    <appender name="consoleController" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+             <level>ERROR</level>
+         </filter>-->
+        <encoder>
+            <!--<pattern>%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n</pattern>-->
+            <!--<pattern>[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%contextName] [%X{sessionId}] [%t] [%-5level] %c:%M:%L - %m%n{%throwable}</pattern>-->
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%X{sessionId}] [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--Service 层的日志输出格式-->
+    <appender name="consoleService" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+             <level>ERROR</level>
+         </filter>-->
+        <encoder>
+            <!--<pattern>%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n</pattern>-->
+            <pattern>【Service】[%X{sessionId}] [%t] [%-5level] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--输出到文件-->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_ERROR_PATH}/${contextName}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!--最多保留7天log-->
+            <maxHistory> ${logFileHistory} </maxHistory>
+            <!-- 所有日志大小不高于1G -->
+            <totalSizeCap> ${logFileTotalSize} </totalSizeCap>
+        </rollingPolicy>
+        <!-- 超过150MB时，立即触发滚动策略，生成新的文件 -->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <!--超过100MB时，触发滚动策略-->
+            <maxFileSize> ${logFileSize} </maxFileSize>
+        </triggeringPolicy>
+
+        <!--日志追加-->
+        <append>true</append>
+
+        <!--文件中只保留错误日志-->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%contextName] [%X{sessionId}] [%t] [%-5level] %c:%M:%L -
+                %m%n{%throwable}
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!--文件日志配置-->
+    <root level="${logFileLevel}">
+        <appender-ref ref="consoleController"/>
+        <appender-ref ref="file"/>
+    </root>
+
+    <!--控制台日志配置-->
+    <root level="${logConsoleLevel}">
+        <appender-ref ref="consoleController"/>
+    </root>
+
+    <!-- 测试环境+开发环境. 多个使用逗号隔开. -->
+    <springProfile name="dev">
+        <logger name="top.wikl.component.controller" level="DEBUG" additivity="false">
+            <appender-ref ref="consoleController"/>
+        </logger>
+        <logger name="top.wikl.component.service" level="ERROR" additivity="false">
+            <appender-ref ref="consoleService"/>
+        </logger>
+    </springProfile>
+
+    <!-- 生产环境. -->
+    <springProfile name="prod">
+        <logger name="top.wikl.component.controller" level="INFO" additivity="false">
+            <appender-ref ref="consoleController"/>
+        </logger>
+    </springProfile>
+</configuration>

@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: trace-b
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://localhost:8770
+  security:
+    user:
+      name: admin
+      password: admin
+
+server:
+  port: 8772
+  servlet:
+    context-path: /trace-b
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:8761/eureka/

@@ -6,27 +6,55 @@ server:
 spring:
   application:
     name: orientdb-jdbc
+  servlet:
+    multipart:
+      #springboot 2.1 后增加 DataSize ,用来避免数据曝光
+      max-file-size: 104857600
+      max-request-size: 524288000
+  datasource:
+    url: jdbc:mysql://10.0.50.150:53306/bmsmartkg?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false
+    username: admin
+    password: Bmzt2016_mysql
+    driver-class-name: com.mysql.jdbc.Driver
+    filters: stat
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 10
+    maxIdle: 15
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    maxOpenPreparedStatements: 5
+    removeAbandoned: true
+    removeAbandonedTimeout: 1800
+    logAbandoned: true
+    type: com.alibaba.druid.pool.DruidDataSource
 
 #存储相关的配置
 storage:
-    #orientdb setting
+  #orientdb setting
   orientdb:
     #    url: remote:10.0.47.59/kngraphIndex;10.0.47.60/kngraphIndex;10.0.47.61/kngraphIndex
-    jdbcurl: remote:10.0.47.51
-    url: remote:10.0.47.51/orientdb_3_1_dev
-    database: orientdb_3_1_dev
+    jdbcurl: remote:10.0.50.150:52424
+    url: remote:10.0.50.150:52424/orientdb_gw_db
+    database: orientdb_gw_db
     username: root
-    password: password
+    password: Bmzt2016_orientdb
 
 eureka:
   client:
-    service-url: http://localhost:8761/eureka/
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
   # 这只为prefer ip的话可以直接展示ip地址
   instance:
     prefer-ip-address: true
 
 # 日志配置
-logging:
-  level: debug
-  pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+#logging:
+#  level: debug
+#  pattern:
+#    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"

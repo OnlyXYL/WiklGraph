@@ -20,7 +20,7 @@ public interface WiklOrientDbSqlService {
     /**
      * 查询实例节点详情信息
      *
-     * @param
+     * @param searchInstanceNodeDetailsVo
      * @return
      * @author XYL
      * @date 2019/9/27 14:06
@@ -31,7 +31,7 @@ public interface WiklOrientDbSqlService {
     /**
      * 查询线详情
      *
-     * @param
+     * @param searchInstanceEdgeDetailsVo
      * @return
      * @author XYL
      * @date 2019/9/27 14:06
@@ -42,7 +42,8 @@ public interface WiklOrientDbSqlService {
     /**
      * 查询图谱实例个数和关系个数
      *
-     * @param
+     * @param currentUserId
+     * @param kngraphId
      * @return
      * @author XYL
      * @date 2019/9/27 14:06
@@ -53,7 +54,7 @@ public interface WiklOrientDbSqlService {
     /**
      * 根据点，查询深度为1 的关系
      *
-     * @param
+     * @param searchOneDepthDataVo
      * @return
      * @author XYL
      * @date 2019/9/27 14:06

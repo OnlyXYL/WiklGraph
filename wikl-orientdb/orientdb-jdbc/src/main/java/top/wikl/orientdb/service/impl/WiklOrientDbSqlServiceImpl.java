@@ -147,7 +147,7 @@ public class WiklOrientDbSqlServiceImpl implements WiklOrientDbSqlService {
         String sql = "MATCH {class:e, as:nodes, where:(@rid = :rid)} RETURN distinct nodes limit -1";
 
         //参数
-        Map<String, Object> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<>(1);
         params.put("rid", searchInstanceEdgeDetailsVo.getId());
 
         //调用方法，执行数据库操作
@@ -178,7 +178,7 @@ public class WiklOrientDbSqlServiceImpl implements WiklOrientDbSqlService {
         //处理属性
         Map<String, Object> others = resultData.getOthers();
 
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>(16);
 
         for (Map.Entry<String, Object> entry : others.entrySet()) {
 
@@ -272,7 +272,7 @@ public class WiklOrientDbSqlServiceImpl implements WiklOrientDbSqlService {
 
         WiklGraphInfo kngraphInfo = new WiklGraphInfo();
 
-        Map<String, String> params = new HashMap<>();
+        Map<String, String> params = new HashMap<>(1);
 
         params.put("kngraphId", kngraphId);
 
@@ -355,7 +355,7 @@ public class WiklOrientDbSqlServiceImpl implements WiklOrientDbSqlService {
 
         OriginFieldResultData originFieldResultData = new OriginFieldResultData();
 
-        Map<String, String> params = new HashMap<>();
+        Map<String, String> params = new HashMap<>(2);
 
         params.put("kngraphId", searchOriginFieldVoId.getKngraphId());
 
@@ -387,7 +387,7 @@ public class WiklOrientDbSqlServiceImpl implements WiklOrientDbSqlService {
             //关闭资源
             WiklOrientdbUtil.close(rs, null, null);
 
-            Map<String, String> hashMap = new HashMap<>();
+            Map<String, String> hashMap = new HashMap<>(1);
 
             hashMap.put(searchOriginFieldVoId.getField(), result);
 

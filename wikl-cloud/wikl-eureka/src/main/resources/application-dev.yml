@@ -1,0 +1,35 @@
+server:
+  port: 8761
+#  servlet:
+#    context-path: /wikl-eureka
+
+spring:
+  application:
+    name: wikl-eureka
+  #配置之刷新静态资源，不刷新后台代码
+  devtools:
+    remote:
+      restart:
+        enabled: false
+  security:
+    user:
+      name: admin
+      password: admin
+
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+
+  server:
+    # 关闭自我保护模式（缺省为打开）
+    enable-self-preservation: false
+  client:
+#    refresh:
+#      enable: true
+    #   服务器端不注册eureka(默认true)
+    register-with-eureka: false
+    #   服务器端不需要抓取服务列表(默认true)
+    fetch-registry: false
+    serviceUrl:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/

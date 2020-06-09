@@ -13,21 +13,39 @@
     <artifactId>neo4j-jdbc</artifactId>
 
     <dependencies>
-        
-    <!--===================================公共模块===============================-->
-    <dependency>
-        <groupId>top.wikl</groupId>
-        <artifactId>neo4j-entity</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-    </dependency>
+        <!--===================================公共模块===============================-->
+        <dependency>
+            <groupId>top.wikl</groupId>
+            <artifactId>neo4j-entity</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 
-    <dependency>
-        <groupId>top.wikl</groupId>
-        <artifactId>neo4j-utils</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-    </dependency>
-</dependencies>
-<build>
+        <dependency>
+            <groupId>top.wikl</groupId>
+            <artifactId>neo4j-utils</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>top.wikl</groupId>
+            <artifactId>common-util</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>top.wikl</groupId>
+            <artifactId>common-exception</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <!--eureka-client-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+    </dependencies>
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

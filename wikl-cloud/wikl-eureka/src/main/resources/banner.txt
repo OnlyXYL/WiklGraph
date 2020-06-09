@@ -1,0 +1,11 @@
+${AnsiColor.BRIGHT_MAGENTA}
+#####################################
+#                                                                                                                  #
+#                               你若安好                                                                    #
+#                                                                                                                  #
+#                                                                       便是晴天                            #
+#                                                                                                                  #
+#####################################
+${AnsiColor.BRIGHT_RED}
+Application Version: ${application.version}${application.formatted-version}
+Spring Boot Version: ${spring-boot.version}${spring-boot.formatted-version}
