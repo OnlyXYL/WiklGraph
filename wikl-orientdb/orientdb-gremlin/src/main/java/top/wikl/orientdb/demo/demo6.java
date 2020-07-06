@@ -1,6 +1,8 @@
 package top.wikl.orientdb.demo;
 
 import com.orientechnologies.orient.client.remote.OStorageRemote;
+import com.orientechnologies.orient.core.replication.OAsyncReplicationError;
+import com.orientechnologies.orient.core.sql.OCommandSQL;
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.impls.orient.OrientGraphFactory;
 import com.tinkerpop.blueprints.impls.orient.OrientGraphNoTx;
@@ -58,6 +60,14 @@ public class demo6 {
             new Thread(() -> {
 
                 OrientGraphNoTx graph = factory.getNoTx();
+
+
+                graph.command(new OCommandSQL().onAsyncReplicationError(new OAsyncReplicationError() {
+                    @Override
+                    public ACTION onAsyncReplicationError(Throwable iException, int iRetry) {
+                        return null;
+                    }
+                })).execute();
 
                 String connectionStrategy = graph.getConnectionStrategy();
 
