@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.neo4j.driver.internal.value.NodeValue;
 import org.neo4j.driver.v1.*;
 import org.neo4j.driver.v1.types.Node;
+import org.neo4j.driver.v1.types.Relationship;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import top.wikl.annotion.WiklMethodLog;
@@ -49,7 +50,7 @@ public class Neo4jServiceImpl implements Neo4jService {
     @Resource
     private Driver driver;
 
-    @WiklMethodLog(description = "查询单个点",level = LogLevel.DEBUG)
+    @WiklMethodLog(description = "查询单个点", level = LogLevel.DEBUG)
     @Override
     public List<WiklNodeInfo> searchOneNode(InInput inInput) {
 
@@ -183,5 +184,156 @@ public class Neo4jServiceImpl implements Neo4jService {
         });
 
         return null;
+    }
+
+    @Override
+    public void createNode(Map<String, Object> params) {
+
+        Session session = driver.session(AccessMode.WRITE);
+
+        Map<String, Object> parameters = new HashMap<>();
+
+        parameters.put("params", params);
+
+        StatementResult transaction = session.writeTransaction(x -> {
+
+            String cypher = " CREATE (n: Person $params) return n";
+
+            System.out.println("cypher ==> " + cypher);
+
+            StatementResult result = x.run(cypher, parameters);
+
+            return result;
+
+        });
+
+        while (transaction.hasNext()) {
+
+            Record next = transaction.next();
+
+            List<String> keys = next.keys();
+
+            keys.stream().forEach(x -> {
+
+                Value value = next.get(x);
+
+                String value_type = value.type().name();
+
+                if ("NODE".equals(value_type)) {
+                    Node node = value.asNode();
+
+                    System.out.println("节点  ==》 " + node.toString());
+
+                } else {
+                    Relationship relationship = value.asRelationship();
+
+                    System.out.println("关系  ==》 " + relationship.toString());
+                }
+
+            });
+        }
+    }
+
+    @Override
+    public void createNodes(List<Map> start, List<Map> end) {
+        Session session = driver.session(AccessMode.WRITE);
+
+        Map<String, Object> startParams = new HashMap<>();
+
+        startParams.put("start", start);
+
+        StatementResult StartTransaction = session.writeTransaction(x -> {
+
+            String cypher = " UNWIND $start as map " + "\n\t"
+                    + " CREATE (n:Student) " + "\n\t"
+                    + " SET n = map ;" + "\n\t";
+
+            System.out.println("cypher ==> " + cypher);
+
+            StatementResult result = x.run(cypher, startParams);
+
+            return result;
+
+        });
+
+        Map<String, Object> endParams = new HashMap<>();
+
+        endParams.put("end", end);
+
+        StatementResult endTransaction = session.writeTransaction(x -> {
+
+            String cypher = " UNWIND $end as map " + "\n\t"
+                    + " CREATE (n: Teacher) " + "\n\t"
+                    + " SET n = map ;" + "\n\t";
+
+            System.out.println("cypher ==> " + cypher);
+
+            StatementResult result = x.run(cypher, endParams);
+
+            return result;
+
+        });
+
+        //创建关系
+        HashMap<String, Object> relationShip = new HashMap<>();
+
+        relationShip.put("start", "Student");
+        relationShip.put("end", "Teacher");
+        relationShip.put("type", "TEACHER_OF");
+
+        this.createRelationShip(relationShip);
+
+
+  /*      while (transaction.hasNext()) {
+
+            Record next = transaction.next();
+
+            List<String> keys = next.keys();
+
+            keys.stream().forEach(x -> {
+
+                Value value = next.get(x);
+
+                String value_type = value.type().name();
+
+                if ("NODE".equals(value_type)) {
+                    Node node = value.asNode();
+
+                    System.out.println("节点  ==》 " + node.toString());
+
+                } else {
+                    Relationship relationship = value.asRelationship();
+
+                    System.out.println("关系  ==》 " + relationship.toString());
+                }
+
+            });
+        }
+*/
+        session.close();
+    }
+
+    @Override
+    public void createRelationShip(Map<String, Object> params) {
+
+        Session session = driver.session(AccessMode.WRITE);
+
+        StatementResult transaction = session.writeTransaction(x -> {
+
+            //学生---老师
+            String cypher = "   MATCH (s:Student),(e:Teacher)" + "\n\t"
+                    + "   WHERE s.teacher = e.name " + "\n\t"
+                    + "    CREATE (s)-[:TEACHER_OF]->(e)";
+
+            System.out.println("cypher ==> " + cypher);
+
+            StatementResult result = x.run(cypher, params);
+
+            return result;
+
+        });
+
+        session.close();
+
     }
 }

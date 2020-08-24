@@ -6,10 +6,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import top.wikl.entity.graph.input.InInput;
 import top.wikl.entity.graph.output.WiklNodeInfo;
 import top.wikl.exception.InputException;
@@ -17,7 +14,10 @@ import top.wikl.neo4j.service.Neo4jService;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author XYL
@@ -57,11 +57,83 @@ public class Neo4JdbcController {
         List<WiklNodeInfo> nodeInfos = neo4jService.searchOneNode(inInput);
 
         return ResponseEntity
-
-
                 .ok()
                 .body(
                         nodeInfos
                 );
+    }
+
+    @GetMapping("/create")
+    public  ResponseEntity<?> createNode(){
+
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("name","里斯");
+        params.put("age","20");
+        params.put("sex","女");
+
+        neo4jService.createNode(params);
+
+        return ResponseEntity
+                .ok()
+               .build();
+    }
+
+    @GetMapping("/create/batch")
+    public  ResponseEntity<?> createNodes(){
+
+        HashMap<String, Object> xiaohong = new HashMap<>();
+        xiaohong.put("name","小红");
+        xiaohong.put("age","20");
+        xiaohong.put("sex","女");
+        xiaohong.put("teacher","王老师");
+        xiaohong.put("vLabel","Student");
+
+        HashMap<String, Object> xiaoming = new HashMap<>();
+        xiaoming.put("name","小明");
+        xiaoming.put("age","20");
+        xiaoming.put("sex","男");
+        xiaoming.put("teacher","李老师");
+        xiaoming.put("vLabel","Student");
+
+        HashMap<String, Object> xiaohui = new HashMap<>();
+        xiaohui.put("name","小灰");
+        xiaohui.put("age","20");
+        xiaohui.put("sex","男");
+        xiaohui.put("teacher","韩老师");
+        xiaohui.put("vLabel","Student");
+
+        HashMap<String, Object> wanglaoshi = new HashMap<>();
+        wanglaoshi.put("name","王老师");
+        wanglaoshi.put("age","20");
+        wanglaoshi.put("sex","男");
+        wanglaoshi.put("vLabel","Teacher");
+
+        HashMap<String, Object> lilaoshi = new HashMap<>();
+        lilaoshi.put("name","李老师");
+        lilaoshi.put("age","20");
+        lilaoshi.put("sex","男");
+        lilaoshi.put("vLabel","Teacher");
+
+        HashMap<String, Object> hanlaoshi = new HashMap<>();
+        hanlaoshi.put("name","韩老师");
+        hanlaoshi.put("age","20");
+        hanlaoshi.put("sex","男");
+        hanlaoshi.put("vLabel","Teacher");
+
+        List<Map> start = new ArrayList<>();
+        start.add(xiaohong);
+        start.add(xiaoming);
+        start.add(xiaohui);
+
+        List<Map> end = new ArrayList<>();
+        end.add(wanglaoshi);
+        end.add(lilaoshi);
+        end.add(hanlaoshi);
+
+        neo4jService.createNodes(start,end);
+
+        return ResponseEntity
+                .ok()
+                .build();
     }
 }
