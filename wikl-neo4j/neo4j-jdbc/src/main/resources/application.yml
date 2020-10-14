@@ -15,7 +15,7 @@ spring:
 #存储相关配置
 storage:
   neo4j:
-    url: bolt://10.0.43.151:7687
+    url: bolt://localhost:7687
     userName: neo4j
     password: 123456
 

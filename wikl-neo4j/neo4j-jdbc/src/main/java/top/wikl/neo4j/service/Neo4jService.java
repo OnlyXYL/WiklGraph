@@ -5,6 +5,7 @@ import top.wikl.entity.graph.output.WiklNodeInfo;
 import top.wikl.entity.graph.output.WiklResultData;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author XYL
@@ -37,4 +38,32 @@ public interface Neo4jService {
      * @since V1.0
      */
     WiklResultData searchByDepth(InInput inInput);
+
+    /**
+     * @param params
+     * @return void
+     * @apiNote 新增单个点
+     * @author XYL
+     * @since 13:55 2020/10/14
+     **/
+    void createNode(Map<String, Object> params);
+
+    /**
+     * @param start
+     * @param end
+     * @return void
+     * @apiNote 批量新增点
+     * @author XYL
+     * @since 13:55 2020/10/14
+     **/
+    void createNodes(List<Map> start, List<Map> end);
+
+    /**
+     * @param params
+     * @return void
+     * @apiNote 新增关系
+     * @author XYL
+     * @since 13:55 2020/10/14
+     **/
+    void createRelationShip(Map<String, Object> params);
 }
