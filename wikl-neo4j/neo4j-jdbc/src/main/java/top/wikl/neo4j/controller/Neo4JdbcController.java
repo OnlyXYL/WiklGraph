@@ -82,7 +82,12 @@ public class Neo4JdbcController {
         yuangong.put("label","v_03ba18b251764794ac5d1b4634b4d232");
         yuangong.put("instanceLabel","v_03ba18b251764794ac5d1b4634b4d232");
         yuangong.put("id",4668);
-
+        yuangong.put("p_suoshugongsi_48","所属公司");
+        yuangong.put("p_xingbie_57","性别");
+        yuangong.put("p_xingming_64","姓名");
+        yuangong.put("p_nianling_55","年龄");
+        yuangong.put("p_suoshuguojia_67","所属国家");
+        yuangong.put("p_chushengriqi_35","出生日期");
 
         HashMap<String, Object> gongsi = new HashMap<>(5);
         gongsi.put("name","公司");
@@ -90,6 +95,10 @@ public class Neo4JdbcController {
         gongsi.put("label","v_0ac999ea78324269a2df6a97c2e85585");
         gongsi.put("instanceLabel","v_0ac999ea78324269a2df6a97c2e85585");
         gongsi.put("id",4669);
+        gongsi.put("p_didian_33","地点");
+        gongsi.put("p_suozaidi_33","所在地");
+        gongsi.put("p_zhuceshijian_33","注册时间");
+        gongsi.put("p_mingcheng_267","名称");
 
         HashMap<String, Object> chengshi = new HashMap<>(5);
         chengshi.put("name","城市");
@@ -97,6 +106,8 @@ public class Neo4JdbcController {
         chengshi.put("label","v_e86f4dddd7ae43fe88d2365af9032895");
         chengshi.put("instanceLabel","v_e86f4dddd7ae43fe88d2365af9032895");
         chengshi.put("id",4670);
+        chengshi.put("p_mingcheng_268","名称");
+        chengshi.put("p_suoshuguojia_68","所属国家");
 
 
         HashMap<String, Object> guojia = new HashMap<>(5);
@@ -105,6 +116,8 @@ public class Neo4JdbcController {
         guojia.put("label","v_cd083624d59147cda51a4d76a27ff00d");
         guojia.put("instanceLabel","v_cd083624d59147cda51a4d76a27ff00d");
         guojia.put("id",4671);
+        guojia.put("p_suozaizhou_32","所在洲");
+        guojia.put("p_mingcheng_269","名称");
 
         HashMap<String, Object> zhou = new HashMap<>(5);
         zhou.put("name","洲");
@@ -112,6 +125,7 @@ public class Neo4JdbcController {
         zhou.put("label","v_747e113524c946eb99fe062685974a55");
         zhou.put("instanceLabel","v_747e113524c946eb99fe062685974a55");
         zhou.put("id",4672);
+        zhou.put("p_mingcheng_270","名称");
 
         nodes.add(yuangong);
         nodes.add(gongsi);
@@ -119,7 +133,13 @@ public class Neo4JdbcController {
         nodes.add(guojia);
         nodes.add(zhou);
 
-        neo4jService.createNodesUnwind(nodes);
+        String label = "Concept1";
+
+        String constratint_name = label+"_name";
+
+        neo4jService.createConstraint(constratint_name,label);
+
+        neo4jService.createNodesUnwind(nodes,label);
 
         return ResponseEntity
                 .ok()

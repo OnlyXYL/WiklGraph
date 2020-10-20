@@ -236,17 +236,20 @@ public class Neo4jServiceImpl implements Neo4jService {
     }
 
     @Override
-    public void createNodesUnwind(List<Map<String,Object>> nodes) {
+    public void createNodesUnwind(List<Map<String,Object>> nodes,String label) {
         Session session = driver.session();
 
         Map<String, Object> params = new HashMap<>(1);
 
         params.put("nodes", nodes);
 
+        /**
+         * MERGE 时，需要加上唯一约束
+         */
         Result StartTransaction = session.writeTransaction(x -> {
 
             String cypher = " UNWIND $nodes as map " + "\n\t"
-                    + " CREATE (n:Student) " + "\n\t"
+                    + " MERGE (n:"+label+"{name: map.name}) " + "\n\t"
                     + " SET n = map ;" + "\n\t";
 
             System.out.println("cypher ==> " + cypher);
@@ -275,6 +278,34 @@ public class Neo4jServiceImpl implements Neo4jService {
             System.out.println("cypher ==> " + cypher);
 
             Result result = x.run(cypher, params);
+
+            return result;
+
+        });
+
+        session.close();
+
+    }
+
+    @Override
+    public void createConstraint(String constraint_name,String label) {
+        StringBuffer constraint_cypher = new StringBuffer();
+        constraint_cypher.append("CREATE CONSTRAINT ");
+        constraint_cypher.append(constraint_name);
+        constraint_cypher.append("_name ");
+        constraint_cypher.append("IF NOT EXISTS ");
+        constraint_cypher.append("ON (n:");
+        constraint_cypher.append(label);
+        constraint_cypher.append(") ");
+        constraint_cypher.append("ASSERT n.name IS UNIQUE\n");
+
+
+        Session session = driver.session();
+
+        Result transaction = session.writeTransaction(x -> {
+            System.out.println("cypher ==> " + constraint_cypher.toString());
+
+            Result result = x.run(constraint_cypher.toString());
 
             return result;
 

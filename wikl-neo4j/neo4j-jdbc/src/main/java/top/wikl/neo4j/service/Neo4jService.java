@@ -55,7 +55,7 @@ public interface Neo4jService {
      * @author XYL
      * @since 13:55 2020/10/14
      **/
-    void createNodesUnwind(List<Map<String,Object>> nodes);
+    void createNodesUnwind(List<Map<String,Object>> nodes,String label);
 
     /**
      * @param params
@@ -65,4 +65,15 @@ public interface Neo4jService {
      * @since 13:55 2020/10/14
      **/
     void createRelationShip(Map<String, Object> params);
+
+    /**
+     * 创建约束
+     *
+     * @param constraint_name
+     * @param label
+     * @return void
+     * @author XYL
+     * @since 19:50 2020/10/20
+     **/
+    void createConstraint(String constraint_name,String label);
 }
