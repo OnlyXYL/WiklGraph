@@ -17,7 +17,7 @@ storage:
   neo4j:
     url: bolt://localhost:7687
     userName: neo4j
-    password: 123456
+    password: password
 
 ## 注册的服务地址 和Eureka Server一样
 eureka:

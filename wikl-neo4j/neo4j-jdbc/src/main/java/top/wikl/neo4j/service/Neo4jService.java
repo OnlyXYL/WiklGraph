@@ -49,14 +49,13 @@ public interface Neo4jService {
     void createNode(Map<String, Object> params);
 
     /**
-     * @param start
-     * @param end
+     * @param nodes
      * @return void
      * @apiNote 批量新增点
      * @author XYL
      * @since 13:55 2020/10/14
      **/
-    void createNodes(List<Map> start, List<Map> end);
+    void createNodesUnwind(List<Map<String,Object>> nodes);
 
     /**
      * @param params

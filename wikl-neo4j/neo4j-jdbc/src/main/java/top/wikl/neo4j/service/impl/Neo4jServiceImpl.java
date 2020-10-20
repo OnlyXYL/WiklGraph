@@ -2,6 +2,7 @@ package top.wikl.neo4j.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.neo4j.driver.*;
+import org.neo4j.driver.Record;
 import org.neo4j.driver.internal.value.NodeValue;
 import org.neo4j.driver.types.Node;
 import org.neo4j.driver.types.Relationship;
@@ -235,81 +236,27 @@ public class Neo4jServiceImpl implements Neo4jService {
     }
 
     @Override
-    public void createNodes(List<Map> start, List<Map> end) {
+    public void createNodesUnwind(List<Map<String,Object>> nodes) {
         Session session = driver.session();
 
-        Map<String, Object> startParams = new HashMap<>();
+        Map<String, Object> params = new HashMap<>(1);
 
-        startParams.put("start", start);
+        params.put("nodes", nodes);
 
         Result StartTransaction = session.writeTransaction(x -> {
 
-            String cypher = " UNWIND $start as map " + "\n\t"
+            String cypher = " UNWIND $nodes as map " + "\n\t"
                     + " CREATE (n:Student) " + "\n\t"
                     + " SET n = map ;" + "\n\t";
 
             System.out.println("cypher ==> " + cypher);
 
-            Result result = x.run(cypher, startParams);
+            Result result = x.run(cypher, params);
 
             return result;
 
         });
 
-        Map<String, Object> endParams = new HashMap<>();
-
-        endParams.put("end", end);
-
-        Result endTransaction = session.writeTransaction(x -> {
-
-            String cypher = " UNWIND $end as map " + "\n\t"
-                    + " CREATE (n: Teacher) " + "\n\t"
-                    + " SET n = map ;" + "\n\t";
-
-            System.out.println("cypher ==> " + cypher);
-
-            Result result = x.run(cypher, endParams);
-
-            return result;
-
-        });
-
-        //创建关系
-        HashMap<String, Object> relationShip = new HashMap<>();
-
-        relationShip.put("start", "Student");
-        relationShip.put("end", "Teacher");
-        relationShip.put("type", "TEACHER_OF");
-
-        this.createRelationShip(relationShip);
-
-
-  /*      while (transaction.hasNext()) {
-
-            Record next = transaction.next();
-
-            List<String> keys = next.keys();
-
-            keys.stream().forEach(x -> {
-
-                Value value = next.get(x);
-
-                String value_type = value.type().name();
-
-                if ("NODE".equals(value_type)) {
-                    Node node = value.asNode();
-
-                    System.out.println("节点  ==》 " + node.toString());
-
-                } else {
-                    Relationship relationship = value.asRelationship();
-
-                    System.out.println("关系  ==》 " + relationship.toString());
-                }
-
-            });
-        }
-*/
         session.close();
     }
 
