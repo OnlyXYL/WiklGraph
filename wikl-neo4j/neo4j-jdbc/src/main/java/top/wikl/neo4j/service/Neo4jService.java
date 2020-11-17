@@ -76,4 +76,6 @@ public interface Neo4jService {
      * @since 19:50 2020/10/20
      **/
     void createConstraint(String constraint_name,String label);
+
+    void createBatch();
 }

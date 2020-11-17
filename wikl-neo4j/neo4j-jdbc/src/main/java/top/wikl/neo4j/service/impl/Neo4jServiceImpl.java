@@ -236,7 +236,7 @@ public class Neo4jServiceImpl implements Neo4jService {
     }
 
     @Override
-    public void createNodesUnwind(List<Map<String,Object>> nodes,String label) {
+    public void createNodesUnwind(List<Map<String, Object>> nodes, String label) {
         Session session = driver.session();
 
         Map<String, Object> params = new HashMap<>(1);
@@ -249,7 +249,7 @@ public class Neo4jServiceImpl implements Neo4jService {
         Result StartTransaction = session.writeTransaction(x -> {
 
             String cypher = " UNWIND $nodes as map " + "\n\t"
-                    + " MERGE (n:"+label+"{name: map.name}) " + "\n\t"
+                    + " MERGE (n:" + label + "{name: map.name}) " + "\n\t"
                     + " SET n = map ;" + "\n\t";
 
             System.out.println("cypher ==> " + cypher);
@@ -288,7 +288,7 @@ public class Neo4jServiceImpl implements Neo4jService {
     }
 
     @Override
-    public void createConstraint(String constraint_name,String label) {
+    public void createConstraint(String constraint_name, String label) {
         StringBuffer constraint_cypher = new StringBuffer();
         constraint_cypher.append("CREATE CONSTRAINT ");
         constraint_cypher.append(constraint_name);
@@ -310,6 +310,55 @@ public class Neo4jServiceImpl implements Neo4jService {
             return result;
 
         });
+
+        session.close();
+
+    }
+
+    @Override
+    public void createBatch() {
+        HashMap<String, Object> params = new HashMap<>();
+
+        StringBuilder builder = new StringBuilder();
+
+        for (int i = 1; i < 5; i++) {
+
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("name", "张三" + i);
+            map.put("id", i);
+            map.put("age", i);
+
+            String paramKey = String.format("%s_%s_params", "User", i);
+
+            String idParamKey = String.format("%s_%s_id", "User", i);
+
+            String idParamLabel = String.format("%s_label", "User");
+
+            params.put(paramKey, map);
+            params.put(idParamLabel, i);
+            params.put(idParamKey, "User");
+
+            String format = String.format("merge (n:%s:%s{id:$%s,label:$%s}) SET n += $%s;\n", "User", "Person", idParamKey, idParamLabel, paramKey);
+
+            builder.append(format);
+        }
+
+        Session session = null;
+        try {
+            session = driver.session();
+
+            Result transaction = session.writeTransaction(x -> {
+                System.out.println("cypher ==> " + builder.toString());
+
+                Result result = x.run(builder.toString(),params);
+
+                return result;
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
 
         session.close();
 

@@ -83,6 +83,10 @@ public class StringFormat {
 
     public static void main(String[] args) {
 
+        stringFormat();
+    }
+
+    public static void format(){
         System.out.printf("Hello,%s.Nice to meet you,I`m %d years old","张三",12);
 
         System.out.println("\n");
@@ -100,6 +104,13 @@ public class StringFormat {
         System.out.println("\n");
         System.out.printf("%s %tB %<td %<tY","Due Date:",new Date());
 
+    }
+
+    public static void stringFormat(){
+
+        String format = String.format("MATCH (s:%s{name:'%s'})", "Concept", "张三");
+
+        System.out.println(format);
     }
 
 }
