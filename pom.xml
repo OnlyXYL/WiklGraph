@@ -35,6 +35,7 @@
         <module>wikl-common/common-exception</module>
         <module>wikl-cloud</module>
         <module>wikl-cloud/wikl-eureka</module>
+        <module>wikl-cloud/wikl-config</module>
         <module>wikl-common/common-util</module>
         <module>wikl-janusgraph</module>
         <module>wikl-component</module>
