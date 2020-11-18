@@ -23,7 +23,7 @@ eureka:
 
   server:
     # 关闭自我保护模式（缺省为打开）
-    enable-self-preservation: false
+    enable-self-preservation: true
   client:
 #    refresh:
 #      enable: true
@@ -33,3 +33,4 @@ eureka:
     fetch-registry: false
     serviceUrl:
       defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
+#      defaultZone: http://localhost:${server.port}/eureka/

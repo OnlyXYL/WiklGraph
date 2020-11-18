@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: trace-a
+  cloud:
+    config:
+      name: trace-a
+      profile: dev
+
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://localhost:8770
+
+server:
+  port: 8771
+  servlet:
+    context-path: /trace-a
+
+

@@ -1,0 +1,31 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: wikl-config
+  security:
+    user:
+      name: admin
+      password: admin
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/OnlyXYL/config.git
+          username: only_xyl@163.com
+          password: xia18811599806
+          search-paths: config-repo
+          skip-ssl-validation: true
+      username: admin
+      password: admin
+      name: wikl-config
+      profile: dev
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:8761/eureka/

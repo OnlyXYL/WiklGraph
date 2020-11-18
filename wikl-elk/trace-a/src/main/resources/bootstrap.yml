@@ -1,0 +1,26 @@
+spring:
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: wikl-config
+      username: admin
+      password: admin
+    #Ribbon 负载均衡正在维护，使用 loadBalancer
+    loadbalancer:
+      ribbon:
+        enabled: false
+  profiles:
+    active: dev
+  security:
+    user:
+      name: admin
+      password: admin
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:8761/eureka/
