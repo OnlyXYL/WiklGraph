@@ -1,0 +1,24 @@
+#server:
+#  port: 8764
+#  servlet:
+#    context-path: /neo4j-jdbc
+
+spring:
+#  application:
+#    name: neo4j-jdbc
+#  servlet:
+#    multipart:
+#      #springboot 2.1 后增加 DataSize ,用来避免数据曝光
+#      max-file-size: 104857600
+#      max-request-size: 524288000
+  cloud:
+    config:
+      name: neo4j-jdbc
+      profile: dev
+
+#存储相关配置
+#storage:
+#  neo4j:
+#    url: bolt://localhost:7687
+#    userName: neo4j
+#    password: password

@@ -8,6 +8,11 @@ spring:
     user:
       name: admin
       password: admin
+  rabbitmq:
+    host: 10.0.46.130
+    port: 5672
+    username: admin
+    password: admin
   cloud:
     config:
       server:
@@ -15,17 +20,29 @@ spring:
           uri: https://github.com/OnlyXYL/config.git
           username: only_xyl@163.com
           password: xia18811599806
+          #配置根目录
           search-paths: config-repo
           skip-ssl-validation: true
-      username: admin
-      password: admin
+          #config-server会在本地的临时目录下克隆远程仓库中的信息，默认保存在本机：C:\Users\zhuyu\AppData\Local\Temp\config-repo-315688083391782199\config-info
+          #可更改本地仓库clone的配置文件信息的路径 spring.cloud.config.server.git.basedir=D:\\localGitRepo\\
+          basedir: E:\work\localGitRepo\wiklgraph
+          #标志强制拉取远程配置，放弃本地的修改
+          force-pull: true
+          #指示应在启动时（而非按需）克隆存储库的标志。通常会导致启动速度较慢，但首次查询速度较快。
+#          clone-on-start: true
+#          strict-host-key-checking: false
+#          refresh-rate: 0
+#          default-label: master
+#      username: admin
+#      password: admin
       name: wikl-config
       profile: dev
+#      label: master
 
 eureka:
   instance:
     prefer-ip-address: true
-    hostname: localhost
+    hostname: 10.0.42.80
   client:
     service-url:
       defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:8761/eureka/

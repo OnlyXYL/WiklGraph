@@ -14,7 +14,7 @@ import org.springframework.context.annotation.PropertySource;
  * @since V1.0
  */
 @ConfigurationProperties(prefix = "storage.neo4j", ignoreUnknownFields = false)
-@PropertySource(value = "classpath:application.yml", encoding = "utf-8")
+@PropertySource(value = "classpath:application-dev.yml", encoding = "utf-8")
 @Data
 @Configuration
 public class Neo4jPropertyConfig {

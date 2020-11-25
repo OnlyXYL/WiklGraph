@@ -1,0 +1,6 @@
+###
+# curl -v -X POST "http://localhost:8080/actuator/bus-refresh"
+POST http://10.0.42.80:8000/actuator/bus-refresh
+
+###
+
