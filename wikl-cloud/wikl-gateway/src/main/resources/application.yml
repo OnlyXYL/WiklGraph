@@ -1,0 +1,24 @@
+server:
+  port: 8771
+
+spring:
+  application:
+    name: wikl-gateway
+  rabbitmq:
+    host: 10.0.46.130
+    port: 5672
+    username: admin
+    password: admin
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: neo4j-jdbc
+          uri: lb://neo4j-jdbc
+          predicates:
+            - Path=/neo4j/config/**
+#          filters:
+#            - StripPrefix=3
+

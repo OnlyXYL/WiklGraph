@@ -3,3 +3,9 @@ management:
     web:
       exposure:
         include: "*"
+spring:
+  cloud:
+    #Ribbon 负载均衡正在维护，使用 loadBalancer
+    loadbalancer:
+      ribbon:
+        enabled: false

@@ -42,7 +42,7 @@ spring:
 eureka:
   instance:
     prefer-ip-address: true
-    hostname: 10.0.42.80
+    hostname: localhost
   client:
     service-url:
       defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:8761/eureka/
