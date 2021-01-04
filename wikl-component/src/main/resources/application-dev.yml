@@ -20,6 +20,9 @@ spring:
       uris: http://10.0.50.150:49300
       username: elastic
       password: Bmsmart_2020
+  data:
+    mongodb:
+      uri: mongodb://bmsmart:Bmzt2016_mongodb@10.0.46.130:47017/bmsmart
 
 # 图谱生成配置，1：生成概念图 2：生成实例图  3：概念和实例
 graph:
