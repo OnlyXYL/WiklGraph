@@ -37,7 +37,12 @@ public enum DicType {
     /**
      * 枚举字典
      */
-    enum_dic("6", "枚举字典");
+    enum_dic("6", "枚举字典"),
+
+    /**
+     * 概念图谱字典
+     */
+    concept_graph_dic("7","概念-图谱字典");
 
     private String key;
 
