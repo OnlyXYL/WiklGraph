@@ -1,0 +1,73 @@
+package top.wikl.neo4j.service.impl.dic.process;
+
+import org.springframework.stereotype.Service;
+import top.wikl.neo4j.WiklGraphLabelUtils;
+import top.wikl.neo4j.entity.Value;
+import top.wikl.neo4j.entity.result.Result;
+import top.wikl.neo4j.enums.DicType;
+import top.wikl.neo4j.model.GetDicInput;
+import top.wikl.neo4j.model.GetDicOutPut;
+import top.wikl.neo4j.service.impl.dic.AbstractDicHandler;
+import top.wikl.neo4j.utils.Neo4jResult;
+import top.wikl.neo4j.utils.Neo4jUtils;
+import top.wikl.utils.excel.FileUtil;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+/**
+ * @author XYL
+ * @title: PropertyDicProcess
+ * @description: TODO
+ * @date 2020/5/14 10:19
+ * @return
+ * @since V1.0
+ */
+@Service
+public class PropertyDicProcess extends AbstractDicHandler<GetDicInput, GetDicOutPut> {
+
+    @Resource
+    private Neo4jUtils neo4jUtils;
+
+    public PropertyDicProcess() {
+        super(DicType.property_dic.getKey());
+    }
+
+    @Override
+    public boolean support(String id) {
+
+        if (DicType.property_dic.getKey().equals(id)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public GetDicOutPut dic(GetDicInput param) throws Exception {
+
+        Integer graphId = param.getGraphId();
+
+        Map<String, String> labelMarkMap = param.getLabelMarkMap();
+
+        //根据图谱信息，从图数据库中获取所有概念，生成概念字典
+        final String conceptSchema = WiklGraphLabelUtils.getConceptSchema(graphId);
+
+        final String cypher = String.format("MATCH (n:%s) return n", conceptSchema);
+
+        //执行neo4j
+        final Result<List<Map<String, Value>>> result = neo4jUtils.query(cypher);
+
+        final Set<String> set = Neo4jResult.propertyDic(result, labelMarkMap);
+
+        String[] conceptNames = set.stream().toArray(String[]::new);
+
+        //调用工具类
+        FileUtil.writeStrToFile(conceptNames, param.getFilePath() + DicType.property_dic.getValue() + "." + param.getSuffix());
+
+
+        return null;
+    }
+}

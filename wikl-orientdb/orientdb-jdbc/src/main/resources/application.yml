@@ -12,7 +12,7 @@ spring:
       max-file-size: 104857600
       max-request-size: 524288000
   datasource:
-    url: jdbc:mysql://****/bmsmartkg?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false
+    url: jdbc:mysql://10.0.46.53/bmsmartkg?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false
     username: admin
     password: Bmzt2016_mysql
     driver-class-name: com.mysql.jdbc.Driver

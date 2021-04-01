@@ -4,8 +4,9 @@ spring:
       ribbon:
         enabled: false
     config:
+      name: neo4j-jdbc
       discovery:
-        enabled: true
+        enabled: false
         service-id: wikl-config
       username: admin
       password: admin

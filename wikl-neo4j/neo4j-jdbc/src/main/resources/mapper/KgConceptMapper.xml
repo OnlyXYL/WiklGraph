@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.wikl.neo4j.mapper.KgConceptMapper">
+
+    <select id="getLabelAndMark" resultType="top.wikl.neo4j.model.KgGetLabelAndMark">
+        select distinct c.label, p.spell as markProperty, c.nodeColor, c.nodeSize
+        from kg_concept c inner join kg_property p on (c.conceptId = p.conceptId)
+        where c.graphId = #{graphId} and c.deleted = 0 and c.parent_concept = 0
+            and p.deleted = 0 and p.markProperty = 1
+    </select>
+
+</mapper>
