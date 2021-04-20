@@ -24,6 +24,7 @@ spring:
       password: admin
       name: admin
 
+
 eureka:
   instance:
     hostname: localhost
@@ -36,3 +37,7 @@ management:
     web:
       exposure:
         include: "*"
+  endpoint:
+    health:
+      # 访问/actuator/health时，显示详细信息，而不是仅仅显示"status": "UP"
+      show-details: always
