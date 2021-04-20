@@ -1,0 +1,18 @@
+server:
+  port: 8774
+
+spring:
+  application:
+    name: wikl-admin
+  security:
+    user:
+      name: admin
+      password: admin
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:8761/eureka/

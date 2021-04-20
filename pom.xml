@@ -45,6 +45,7 @@
         <module>wikl-elk/wikl-zipkin</module>
         <module>wikl-elk/trace-a</module>
         <module>wikl-elk/trace-b</module>
+        <module>wikl-cloud/wikl-admin</module>
     </modules>
 
     <properties>

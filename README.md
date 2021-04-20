@@ -9,6 +9,9 @@
  WiklGraph
  ├── wikl-cloud
        ├── wikl-eureka                      #服务注册与发现中心               -->端口：8761
+       ├── wikl-config                      #配置中心                       -->端口：8000
+       ├── wikl-gateway                     #网关                          -->端口：8773
+       ├── wikl-admin                       #监控工具                       -->端口：8774
  ├── wikl-common                            #公共模块
        ├── common-entity
        ├── common-util
@@ -28,6 +31,8 @@
  ├── wikl-portal                            #Portal模块                      -->端口：8081
  ├── wikl-elk
          ├── wikl-zipkin    8770  
+         ├── trace-a    8771  
+         ├── trace-b    8772  
 ```
 
 # `图数据库 `
