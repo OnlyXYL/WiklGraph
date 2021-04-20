@@ -22,7 +22,11 @@ public class RegexLearn {
         String email = "abcd test@runoob.com 1234";
         String patt1 = "[^\\s]+@[^\\s]+.[a-zA-Z]{2,6}";
 
-        regex(regex, text);
+        String number = "1a";
+
+        String reg = "^[0-9]?$";
+
+        regex(reg, number);
     }
 
     /**
