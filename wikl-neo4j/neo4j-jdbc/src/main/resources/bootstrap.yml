@@ -1,4 +1,8 @@
+#server:
+#  port: 8764
 spring:
+  application:
+    name: neo4j-jdbc
   cloud:
     loadbalancer:
       ribbon:
@@ -6,17 +10,13 @@ spring:
     config:
       name: neo4j-jdbc
       discovery:
-        enabled: false
+        enabled: true
         service-id: wikl-config
+      #此处用户名密码为config-server中开启security的认证用户名密码
       username: admin
       password: admin
-#      label: master
+      label: master
       profile: dev
-  rabbitmq:
-    host: 10.0.46.130
-    port: 5672
-    username: admin
-    password: admin
   profiles:
     active: dev
   security:
