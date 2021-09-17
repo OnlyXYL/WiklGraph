@@ -1,5 +1,7 @@
 package top.wikl.wikljava.regex;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,7 +26,43 @@ public class RegexLearn {
 
         String reg = "^[0-9]?$";
 
-        regex(reg, number);
+        String re = "^([1-9]{1}\\d*)|0$";
+
+        String train = "aadsfc0";
+
+        String str = " 3 2 ";
+
+        final String replaceAll = str.replaceAll("\s+", "");
+
+        String r = "^(0{1})(\\.\\d{1,3})?$";
+
+        String v = "1.000";
+
+        String dic = "^[\\u4E00-\\u9FA5A-Za-z0-9]{0,15}$";
+
+        String dicName = "测试 0521 test";
+
+        String version = "1.9.9";
+
+        final String replaceAll1 = version.replaceAll("[.]", "");
+
+        int parseInt = Integer.parseInt(replaceAll1);
+
+        parseInt+=1;
+
+        System.out.println(parseInt);
+
+        final String valueOf = String.valueOf(parseInt);
+
+        final String[] split = valueOf.split("");
+
+        final List<String> list = Arrays.asList(split);
+
+        final String format = String.format("v%s", String.join(".", list));
+
+        System.out.println(format);
+
+//        regex(r, v);
     }
 
     /**

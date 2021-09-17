@@ -17,12 +17,18 @@ public class OptionalTest {
     public static void main(String[] args) {
 
         ArrayList<String> strings = new ArrayList<>();
+        ArrayList<User> users = new ArrayList<>();
 
+        final User user = new User();
+
+        user.setName("ccc");
+
+        users.add(user);
         strings.add("1");
 
-        final ArrayList<String> strings1 = Optional.ofNullable(strings).orElse(null);
+        final String s1 = Optional.ofNullable(users).map(s -> Optional.ofNullable(s.stream().findFirst().orElse(null)).map(User::getName).orElse("空对象")).orElse("空");
 
-        System.out.println(strings1);
+        System.out.println(s1);
 
         final List<String> list = Optional.ofNullable(strings).map(n -> n.stream().limit(2).collect(Collectors.toList())).orElse(null);
 

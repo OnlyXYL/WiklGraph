@@ -45,7 +45,7 @@ public class PocController {
 
         dicInput.setDicType(DicType.getEnumByKey(dicType));
 
-        dicInput.setFilePath("C:\\Users\\XYL\\Desktop\\字典\\");
+        dicInput.setFilePath("C:\\Users\\XYL\\Desktop\\城安院\\字典\\");
 
         dicInput.setSuffix("dic");
 
