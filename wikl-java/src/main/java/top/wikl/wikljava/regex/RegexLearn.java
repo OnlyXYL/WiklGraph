@@ -1,9 +1,11 @@
 package top.wikl.wikljava.regex;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * 正则
@@ -48,7 +50,7 @@ public class RegexLearn {
 
         int parseInt = Integer.parseInt(replaceAll1);
 
-        parseInt+=1;
+        parseInt += 1;
 
         System.out.println(parseInt);
 
@@ -59,10 +61,163 @@ public class RegexLearn {
         final List<String> list = Arrays.asList(split);
 
         final String format = String.format("v%s", String.join(".", list));
-
         System.out.println(format);
+        //正则表达式，去除word章节的序号
+        removeXhFromChapter();
 
-//        regex(r, v);
+
+        splitByCX();
+
+//        String parent = "岩屑.录井.剖面.数据.深度.归位";
+//        String parent = "含有物.解释.深度.归位";
+        String parent = "试油.";
+
+//        String coreWords = "岩屑.录井.剖面.数据.归位";
+//        String coreWords = "含有物.解释.归位";
+        String coreWords = "试油.地质.设计";
+
+        extractCommonFactors(parent, coreWords);
+
+    }
+
+    /**
+     * 去除章节序号
+     *
+     * @param
+     * @return void
+     * @author XYL
+     * @since 21:50 2021/10/24 0024
+     **/
+    public static void removeXhFromChapter() {
+        String rr = "^[\\\\\\\\(\\\\\\\\（]?[[一二三四五六七八九十0-9a-zA-Z]+[、.]?[一二三四五六七八九十0-9a-zA-Z]]*[\\\\\\\\)\\\\\\\\）]?[、.\s]?";
+
+        List<String> list1 = Arrays.asList("1.1.1.第一章节", "1.1.1. 第二章节", "1.1、第三章节", "一、第四章节", "(一)、第五章节", "a.b 第六章节", "1.1.1) 第七章节", "1）第八章节", "a) 第九章节", "");
+
+        list1.forEach(a -> {
+            String s = a.replaceAll(rr, "");
+            System.out.println(s);
+        });
+
+    }
+
+    /**
+     * 根据词性切分
+     * <p>
+     * /v，/b，/o，/po
+     *
+     * @param
+     * @return void
+     * @author XYL
+     * @since 21:50 2021/10/24 0024
+     **/
+    public static void splitByCX() {
+
+//        String words = "井位/pp.设计/v_.区块/po_.单元/pp_.名称/pp.";
+        String words = "井筒/o_温度/pp、/fh压力/pp测试/b_";
+//        String words = "固井";
+
+        String regex = "/(b_|v_|o_|po)";
+
+//        final String all = words.replaceAll("[.]", "");
+
+        String[] split = words.split(regex);
+
+        LinkedList<String> strings = new LinkedList<>(Arrays.asList(split));
+
+        final List<String> collect = strings.stream().map(s -> s.replaceAll("/[a-z]*", "")).collect(Collectors.toList());
+
+        collect.forEach(System.out::println);
+    }
+
+
+    /**
+     * 提取公因式
+     *
+     * @return java.lang.String
+     * @author XYL
+     * @since 12:21 2021/11/21 0021
+     **/
+    public static String extractCommonFactors(String parent, String coreWords) {
+
+        //拼接词性
+//        parent = "岩屑/o_.录井/b_.剖面/po.数据/po.深度.归位/pm";
+//        parent ="含有物.解释.深度.归位";
+
+//        final String replaceAll = parent.replaceAll("[.]", "");
+
+//        final String[] split = parent.split("/(b_|v_|o_|po|pm)");
+        final String[] split = parent.split("[.]");
+
+        final int length = split.length;
+
+        if (length > 1) {
+            for (int i = length - 1; i > 0; i--) {
+                String append = append(split, i);
+
+                if (coreWords.startsWith(append)) {
+                    System.out.println("提取公因式结果：" + append);
+
+                    if (append.endsWith(".")) {
+
+                        int indexOf = append.lastIndexOf(".");
+
+                        append = append.substring(0,indexOf);
+
+                    }
+
+
+                    final String format = String.format("(%s)", append);
+
+                    final String[] strings = parent.split(format);
+
+                    final String string = strings[strings.length - 1];
+
+                    System.out.println(string);
+
+                    return append;
+                }
+            }
+        } else {
+            if (coreWords.startsWith(parent)&&coreWords.contains(".")) {
+                System.out.println("提取公因式结果：" + parent);
+
+                if (parent.endsWith(".")) {
+
+                    int indexOf = parent.lastIndexOf(".");
+
+                    parent = parent.substring(0,indexOf);
+
+                }
+
+                final String format = String.format("(%s.)", parent);
+
+                final String[] strings = coreWords.split(format);
+
+                final String string = strings[strings.length - 1];
+
+                System.out.println(string);
+
+                return parent;
+            }
+        }
+
+
+        return "";
+    }
+
+    public static String append(String[] split, int i) {
+
+        final StringBuffer buffer = new StringBuffer();
+
+        for (int j = 0; j <= i; j++) {
+
+            buffer.append(split[j]).append(".");
+
+        }
+        final String toString = buffer.toString();
+//        final String replaceAll = toString.replaceAll("/[a-z]*", "");
+
+        return toString;
     }
 
     /**

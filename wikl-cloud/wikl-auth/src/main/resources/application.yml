@@ -1,0 +1,22 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: wikl-auth
+  security:
+    user:
+      name: admin
+      password: admin
+    oauth2:
+      client:
+        client-id: wikl
+        client-secret: 123456
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:8761/eureka/
