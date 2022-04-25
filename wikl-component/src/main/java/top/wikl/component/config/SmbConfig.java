@@ -2,6 +2,7 @@ package top.wikl.component.config;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.PropertySource;
@@ -22,10 +23,10 @@ import java.util.Map;
  */
 @Conditional(SmbCondition.class)
 @ConfigurationProperties(prefix = "graph.special", ignoreUnknownFields = false)
-@PropertySource(value = {"classpath:application-${spring.profiles.active}.yml"}, encoding = "utf-8")
+@PropertySource(value = {"classpath:application.yml"}, encoding = "utf-8")
 @Slf4j
 @Data
-@Component
+@SpringBootConfiguration
 public class SmbConfig {
 
     /**

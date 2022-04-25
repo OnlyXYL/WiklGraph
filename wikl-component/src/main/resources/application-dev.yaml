@@ -1,8 +1,3 @@
-server:
-  port: 8768
-  servlet:
-    context-path: /wikl-component
-
 spring:
   application:
     name: wikl-component
@@ -16,10 +11,9 @@ spring:
       name: admin
       password: admin
   elasticsearch:
-    rest:
-      uris: http://10.0.50.150:49300
-      username: elastic
-      password: Bmsmart_2020
+    uris: http://10.0.50.150:49300
+    username: elastic
+    password: Bmsmart_2020
   data:
     mongodb:
       uri: mongodb://bmsmart:Bmzt2016_mongodb@10.0.46.130:47017/bmsmart

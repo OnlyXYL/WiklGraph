@@ -19,5 +19,9 @@ public class TestPinyin {
 
         System.out.println(pinYin);
         System.out.println(pinYin1);
+
+        String aa = null;
+
+        System.out.println(aa.toString());
     }
 }

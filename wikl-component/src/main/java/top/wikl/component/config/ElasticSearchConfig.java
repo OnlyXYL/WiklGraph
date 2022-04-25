@@ -42,7 +42,8 @@ public class ElasticSearchConfig {
 
         RestHighLevelClient client = new RestHighLevelClient(
                 RestClient.builder(
-                        new HttpHost(elasticSearchProperties.getHost(), elasticSearchProperties.getPort())
+                        HttpHost.create(elasticSearchProperties.getUris())
+//                        new HttpHost(elasticSearchProperties.getUris())
                 )
                         //设置监听器，每次节点失败都可以监听到，可以作额外处理
                         .setFailureListener(

@@ -2,6 +2,7 @@ package top.wikl.component.config.properties;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -14,16 +15,14 @@ import org.springframework.stereotype.Component;
  * @return
  * @since V1.0
  */
-@ConfigurationProperties(prefix = "elastic", ignoreUnknownFields = false)
-@PropertySource(value = {"classpath:application-${spring.profiles.active}.yml"}, encoding = "utf-8")
+@ConfigurationProperties(prefix = "spring.elasticsearch", ignoreUnknownFields = false)
+@PropertySource(value = {"classpath:application.yml"}, encoding = "utf-8")
 @Slf4j
 @Data
-@Component
+@SpringBootConfiguration
 public class ElasticSearchProperties {
 
-    private String host;
-
-    private Integer port;
+    private String uris;
 
     private String username;
 
