@@ -1,4 +1,4 @@
-package top.wikl.config;
+package top.wikl.config.granter;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.provider.*;

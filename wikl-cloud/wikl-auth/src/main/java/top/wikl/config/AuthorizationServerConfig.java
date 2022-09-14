@@ -16,6 +16,7 @@ import org.springframework.security.oauth2.provider.implicit.ImplicitTokenGrante
 import org.springframework.security.oauth2.provider.password.ResourceOwnerPasswordTokenGranter;
 import org.springframework.security.oauth2.provider.refresh.RefreshTokenGranter;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import top.wikl.config.granter.PwdImgCodeGranter;
 import top.wikl.service.ValidateCodeService;
 
 import javax.annotation.Resource;
