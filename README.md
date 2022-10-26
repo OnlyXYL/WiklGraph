@@ -1,5 +1,17 @@
 # WiklGraph
 
+[![](https://img.shields.io/github/commit-activity/w/OnlyXYL/WiklGraph)](https://github.com/OnlyXYL)
+
+[![](https://img.shields.io/github/commit-status/OnlyXYL/WiklGraph/263.1.1.x/f8bf0bf)]()
+
+[![](https://img.shields.io/github/v/release/OnlyXYl/WiklGraph?display_name=tag&include_prereleases)]()
+
+[![](https://img.shields.io/github/v/tag/OnlyXYL/WiklGraph)]() 
+
+[![](https://img.shields.io/bitbucket/issues/OnlyXYL/WiklGraph)]()
+
+[![](https://img.shields.io/github/issues-closed/OnlyXYL/WiklGraph)]()
+
 # `背景`
 #### 图谱学习之路，图谱的构建
 
