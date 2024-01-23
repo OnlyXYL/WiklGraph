@@ -1,11 +1,13 @@
 package top.wikl.neo4j.service.impl;
 
 import org.springframework.stereotype.Service;
+import top.wikl.neo4j.enums.DicType;
 import top.wikl.neo4j.mapper.KgConceptMapper;
 import top.wikl.neo4j.model.GetDicInput;
 import top.wikl.neo4j.model.KgGetLabelAndMark;
 import top.wikl.neo4j.service.PocService;
 import top.wikl.neo4j.service.impl.dic.DicHandler;
+import top.wikl.neo4j.service.impl.dic.factory.DicFactory;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -40,6 +42,14 @@ public class PocServiceImpl implements PocService {
 
             getDicInput.setLabelMarkMap(labelMarkMap);
 
+            //调用方式一
+
+            final DicHandler dicHandler = DicFactory.getDicHandler(DicType.enum_dic.getKey());
+
+            dicHandler.dic(getDicInput);
+
+
+            //方式二。使用方式一时，不需要接口中的support()方法
             //根据不同的字典，获取不同的数据，返回控制台
             for (DicHandler handler : interfaces) {
 
